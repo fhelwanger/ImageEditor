@@ -12,21 +12,26 @@ namespace ImageEditor
 {
     public partial class frmImageEditor : Form
     {
+        private ManipuladorImagem manipuladorImagem = new ManipuladorImagem();
+
         public frmImageEditor()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void mnuAbrir_Click(object sender, EventArgs e)
         {
-            var img1 = new ManipuladorImagem();
-            img1.CarregarImagem(@"D:\Lenna.png");
-            pictureBox1.Image = img1.Imagem;
-
-            var img2 = new ManipuladorImagem();
-            img2.CarregarImagem(@"D:\Lenna.png");
-            img2.TransformarEscalaCinza();
-            pictureBox2.Image = img2.Imagem;
+            using (var j = new OpenFileDialog())
+            {
+                j.Filter = "Imagens | *.jpg; *.jpeg; *.png; *.bmp; *.gif | Todos os arquivos| *";
+                
+                if (j.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    manipuladorImagem.CarregarImagem(j.FileName);
+                    manipuladorImagem.TransformarEscalaCinza();
+                    picImagem.Image = manipuladorImagem.Imagem;
+                }
+            }
         }
     }
 }
