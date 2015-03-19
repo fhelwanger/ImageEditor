@@ -33,5 +33,19 @@ namespace ImageEditor
                 }
             }
         }
+
+        private void mnuHistograma_Click(object sender, EventArgs e)
+        {
+            if (manipuladorImagem.Imagem == null)
+            {
+                MessageBox.Show("Selecione uma imagem", "ImageEditor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            using (var j = new frmHistograma(manipuladorImagem.CalcularHistograma()))
+            {
+                j.ShowDialog();
+            }
+        }
     }
 }

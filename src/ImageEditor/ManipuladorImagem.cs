@@ -40,6 +40,21 @@ namespace ImageEditor
             });
         }
 
+        public int[] CalcularHistograma()
+        {
+            var histograma = new int[256];
+
+            AbrirBytesImagem(bytes =>
+            {
+                for (int i = 0; i < bytes.Length; i += 3)
+                {
+                    histograma[bytes[i]]++;
+                }
+            });
+
+            return histograma;
+        }
+
         private void AbrirBytesImagem(Action<byte[]> acao)
         {
             var area = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
