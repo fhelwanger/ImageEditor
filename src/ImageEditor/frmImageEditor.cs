@@ -29,7 +29,17 @@ namespace ImageEditor
                 {
                     manipuladorImagem.CarregarImagem(j.FileName);
                     manipuladorImagem.TransformarEscalaCinza();
+                    
                     picImagem.Image = manipuladorImagem.Imagem;
+
+                    var estatisticas = manipuladorImagem.CalcularEstatisticas();
+                    
+                    dgvEstatisticas.DataSource = new[] {
+                        new { Nome = "Média", Valor = estatisticas.Media },
+                        new { Nome = "Mediana", Valor = estatisticas.Mediana },
+                        new { Nome = "Moda", Valor = estatisticas.Moda },
+                        new { Nome = "Variância", Valor = estatisticas.Variancia }
+                    };
                 }
             }
         }

@@ -11,6 +11,14 @@ namespace ImageEditor
 {
     public class ManipuladorImagem
     {
+        public class Estatisticas
+        {
+            public int Media { get; set; }
+            public int Mediana { get; set; }
+            public int Moda { get; set; }
+            public int Variancia { get; set; }
+        }
+
         private Bitmap bitmap;
 
         public Image Imagem
@@ -23,6 +31,11 @@ namespace ImageEditor
 
         public void CarregarImagem(string caminho)
         {
+            if (bitmap != null)
+            {
+                bitmap.Dispose();
+            }
+            
             bitmap = new Bitmap(Image.FromFile(caminho));
         }
 
@@ -53,6 +66,38 @@ namespace ImageEditor
             });
 
             return histograma;
+        }
+
+        public Estatisticas CalcularEstatisticas()
+        {
+            var estatisticas = new Estatisticas();
+
+            AbrirBytesImagem(bytes =>
+            {
+                var soma = 0;
+
+                for (int i = 0; i < bytes.Length; i += 3)
+                {
+                    soma += bytes[i];
+                }
+
+                estatisticas.Media = soma / (bytes.Length / 3);
+                estatisticas.Mediana = bytes.OrderBy(x => x).ElementAt(bytes.Length / 2);
+
+                soma = 0;
+
+                for (int i = 0; i < bytes.Length; i += 3)
+                {
+                    soma += (int)Math.Pow(bytes[i] - estatisticas.Media, 2);
+                }
+
+                estatisticas.Variancia = soma / (bytes.Length / 3);
+            });
+
+            var histograma = CalcularHistograma();
+            estatisticas.Moda = histograma.ToList().IndexOf(histograma.Max());
+            
+            return estatisticas;
         }
 
         private void AbrirBytesImagem(Action<byte[]> acao)
