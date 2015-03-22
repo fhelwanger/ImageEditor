@@ -1,4 +1,4 @@
-﻿namespace ImageEditor
+﻿namespace ImageEditor.Gui
 {
     partial class frmHistograma
     {

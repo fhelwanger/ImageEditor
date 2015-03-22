@@ -11,14 +11,6 @@ namespace ImageEditor
 {
     public class ManipuladorImagem
     {
-        public class Estatisticas
-        {
-            public int Media { get; set; }
-            public int Mediana { get; set; }
-            public int Moda { get; set; }
-            public int Variancia { get; set; }
-        }
-
         private Bitmap bitmap;
 
         public Image Imagem
@@ -68,9 +60,9 @@ namespace ImageEditor
             return histograma;
         }
 
-        public Estatisticas CalcularEstatisticas()
+        public EstatisticasImagem CalcularEstatisticas()
         {
-            var estatisticas = new Estatisticas();
+            var estatisticas = new EstatisticasImagem();
 
             AbrirBytesImagem(bytes =>
             {
