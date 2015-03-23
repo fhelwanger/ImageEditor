@@ -8,12 +8,11 @@ using Xunit;
 
 namespace ImageEditor.Test
 {
-    [Collection("BitmapsParaTeste")]
-    public class ManipuladorImagemTest
+    public class ManipuladorImagemTest : IClassFixture<BitmapsFixture>
     {
-        private BitmapsParaTeste bitmapsParaTeste;
+        private BitmapsFixture bitmapsParaTeste;
 
-        public ManipuladorImagemTest(BitmapsParaTeste bitmapsParaTeste)
+        public ManipuladorImagemTest(BitmapsFixture bitmapsParaTeste)
         {
             this.bitmapsParaTeste = bitmapsParaTeste;
         }
@@ -35,9 +34,21 @@ namespace ImageEditor.Test
                 {
                     var pixelImagemCaminho = manipuladorImagem.Imagem.GetPixel(x, y);
                     var pixelImagemTeste = bitmapsParaTeste.Lenna.GetPixel(x, y);
+
                     Assert.True(pixelImagemCaminho == pixelImagemTeste );
                 }
             }
+        }
+
+        [Fact]
+        public void CarregarImagem_DoDiscoInexistente_LancaExcecao()
+        {
+            // Arrange
+            var manipuladorImagem = new ManipuladorImagem();
+            var caminho = @"C:\este_arquivo_nao_deve_existir.aaaxxxbbb";
+
+            // Act & Assert
+            Assert.Throws<FileNotFoundException>(() => manipuladorImagem.CarregarImagem(caminho));
         }
 
         [Fact]
@@ -59,7 +70,7 @@ namespace ImageEditor.Test
             // Arrange
             var manipuladorImagem = new ManipuladorImagem();
 
-            manipuladorImagem.CarregarImagem(bitmapsParaTeste.Rgb);
+            manipuladorImagem.CarregarImagem(bitmapsParaTeste.Lenna);
 
             // Act
             manipuladorImagem.TransformarEscalaCinza();
@@ -78,21 +89,39 @@ namespace ImageEditor.Test
         }
 
         [Fact]
-        public void CalcularHistograma_ImagemDoisPixels_HistogramaCalculado()
+        public void CalcularHistograma_ComImagemEscalaCinza_HistogramaCalculado()
         {
             // Arrange
             var manipuladorImagem = new ManipuladorImagem();
 
-            manipuladorImagem.CarregarImagem(bitmapsParaTeste.PretoBranco);
+            manipuladorImagem.CarregarImagem(bitmapsParaTeste.Histograma);
 
             // Act
             var histograma = manipuladorImagem.CalcularHistograma();
 
             // Assert
-            Assert.Equal(1, histograma[0]);
+            Assert.Equal(2, histograma[0]);
             Assert.Equal(1, histograma[0xFF]);
 
             Assert.All(histograma.Take(255).Skip(1), h => Assert.Equal(0, h));
+        }
+
+        [Fact]
+        public void CalcularEstatisticas_ComImagemEscalaCinza_CalculoCorreto()
+        {
+            // Arrange
+            var manipuladorImagem = new ManipuladorImagem();
+
+            manipuladorImagem.CarregarImagem(bitmapsParaTeste.Estatisticas);
+
+            // Act
+            var estatisticas = manipuladorImagem.CalcularEstatisticas();
+
+            // Assert
+            Assert.Equal(139, estatisticas.Media);
+            Assert.Equal(128, estatisticas.Mediana);
+            Assert.Equal(254, estatisticas.Moda);
+            Assert.Equal(10426, estatisticas.Variancia);
         }
     }
 }

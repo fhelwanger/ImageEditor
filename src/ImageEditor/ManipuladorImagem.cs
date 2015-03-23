@@ -85,7 +85,7 @@ namespace ImageEditor
             
             AbrirBytesImagem(bytes =>
             {
-                var soma = 0;
+                var soma = 0L;
                 var listaMediana = new List<byte>();
 
                 for (int i = 0; i < bytes.GetLength(0); i++)
@@ -97,7 +97,7 @@ namespace ImageEditor
                     }
                 }
 
-                estatisticas.Media = soma / (bytes.Length / PIXEL_TAMANHO);
+                estatisticas.Media = (int)(soma / (bytes.Length / PIXEL_TAMANHO));
                 estatisticas.Mediana = listaMediana.OrderBy(x => x).ElementAt(listaMediana.Count() / 2);
 
                 soma = 0;
@@ -110,7 +110,7 @@ namespace ImageEditor
                     }
                 }
 
-                estatisticas.Variancia = soma / (bytes.Length / PIXEL_TAMANHO);
+                estatisticas.Variancia = (int)(soma / (bytes.Length / PIXEL_TAMANHO));
             });
             
             var histograma = CalcularHistograma();
