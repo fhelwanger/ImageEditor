@@ -40,5 +40,23 @@ namespace ImageEditor.Test
                 }
             }
         }
+
+        [Fact]
+        public void CalcularHistograma_ImagemDoisPixels_HistogramaCalculado()
+        {
+            // Arrange
+            var manipuladorImagem = new ManipuladorImagem();
+
+            manipuladorImagem.CarregarImagem(bitmapsParaTeste.PretoBranco);
+
+            // Act
+            var histograma = manipuladorImagem.CalcularHistograma();
+
+            // Assert
+            Assert.Equal(1, histograma[0]);
+            Assert.Equal(1, histograma[0xFF]);
+
+            Assert.All(histograma.Take(255).Skip(1), h => Assert.Equal(0, h));
+        }
     }
 }

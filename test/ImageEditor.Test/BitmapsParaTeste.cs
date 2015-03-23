@@ -13,17 +13,20 @@ namespace ImageEditor.Test
     {
         public Bitmap Lenna { get; set; }
         public Bitmap Rgb { get; set; }
+        public Bitmap PretoBranco { get; set; }
 
         public BitmapsParaTeste()
         {
             CarregarLenna();
             CriarRgb();
+            CriarPretoBranco();
         }
 
         public void Dispose()
         {
             Lenna.Dispose();
             Rgb.Dispose();
+            PretoBranco.Dispose();
         }
 
         private void CarregarLenna()
@@ -33,10 +36,20 @@ namespace ImageEditor.Test
 
         private void CriarRgb()
         {
-            Rgb = new Bitmap(3, 1);
+            Rgb = new Bitmap(3, 2);
             Rgb.SetPixel(0, 0, Color.FromArgb(0xFF, 0, 0));
             Rgb.SetPixel(1, 0, Color.FromArgb(0, 0xFF, 0));
             Rgb.SetPixel(2, 0, Color.FromArgb(0, 0, 0xFF));
+            Rgb.SetPixel(0, 1, Color.FromArgb(0xFF, 0, 0));
+            Rgb.SetPixel(1, 1, Color.FromArgb(0, 0xFF, 0));
+            Rgb.SetPixel(2, 1, Color.FromArgb(0, 0, 0xFF));
+        }
+
+        private void CriarPretoBranco()
+        {
+            PretoBranco = new Bitmap(2, 1);
+            PretoBranco.SetPixel(0, 0, Color.FromArgb(0, 0, 0));
+            PretoBranco.SetPixel(1, 0, Color.FromArgb(0xFF, 0xFF, 0xFF));
         }
     }
 
