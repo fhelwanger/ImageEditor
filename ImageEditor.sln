@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A901C939-63C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageEditor", "src\ImageEditor\ImageEditor.csproj", "{B3E1E957-A4B0-41F2-B757-8918578D830A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageEditor.Test", "test\ImageEditor.Test\ImageEditor.Test.csproj", "{8500851A-52BC-44CA-930D-B026DBE8B67D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{136508CE-2E2D-4946-A8E3-F0721887C8E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,10 @@ Global
 		{B3E1E957-A4B0-41F2-B757-8918578D830A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3E1E957-A4B0-41F2-B757-8918578D830A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3E1E957-A4B0-41F2-B757-8918578D830A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8500851A-52BC-44CA-930D-B026DBE8B67D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8500851A-52BC-44CA-930D-B026DBE8B67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8500851A-52BC-44CA-930D-B026DBE8B67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8500851A-52BC-44CA-930D-B026DBE8B67D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,5 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B52EAE6B-2926-4AF1-A8DE-4B5563360C82} = {A901C939-63CD-4537-87CA-0CE0FBB8D6AF}
 		{B3E1E957-A4B0-41F2-B757-8918578D830A} = {A901C939-63CD-4537-87CA-0CE0FBB8D6AF}
+		{8500851A-52BC-44CA-930D-B026DBE8B67D} = {136508CE-2E2D-4946-A8E3-F0721887C8E5}
 	EndGlobalSection
 EndGlobal

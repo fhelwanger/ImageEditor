@@ -13,7 +13,7 @@ namespace ImageEditor
     {
         private Bitmap bitmap;
 
-        public Image Imagem
+        public Bitmap Imagem
         {
             get
             {
@@ -23,12 +23,18 @@ namespace ImageEditor
 
         public void CarregarImagem(string caminho)
         {
-            if (bitmap != null)
+            var bitmap = new Bitmap(Image.FromFile(caminho));
+            CarregarImagem(bitmap);
+        }
+
+        public void CarregarImagem(Bitmap bitmap)
+        {
+            if (this.bitmap != null)
             {
-                bitmap.Dispose();
+                this.bitmap.Dispose();
             }
-            
-            bitmap = new Bitmap(Image.FromFile(caminho));
+
+            this.bitmap = bitmap;
         }
 
         public void TransformarEscalaCinza()
