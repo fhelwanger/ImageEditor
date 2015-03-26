@@ -12,7 +12,6 @@ namespace ImageEditor
     public class ManipuladorImagem
     {
         private const int PIXEL_TAMANHO = 3;
-        private const PixelFormat PIXEL_FORMATO = PixelFormat.Format24bppRgb;
 
         private Bitmap bitmap;
 
@@ -22,13 +21,6 @@ namespace ImageEditor
             {
                 return bitmap;
             }
-        }
-
-        public void CarregarImagem(string caminho)
-        {
-            var bitmap = new Bitmap(Image.FromFile(caminho));
-
-            CarregarImagem(bitmap);
         }
 
         public void CarregarImagem(Bitmap bitmap)
@@ -61,70 +53,12 @@ namespace ImageEditor
             });
         }
 
-        public int[] CalcularHistograma()
-        {
-            var histograma = new int[256];
-
-            AbrirBytesImagem(bytes =>
-            {
-                for (int i = 0; i < bytes.GetLength(0); i++)
-                {
-                    for (int j = 0; j < bytes.GetLength(1); j += PIXEL_TAMANHO)
-                    {
-                        histograma[bytes[i, j]]++;
-                    }
-                }
-            });
-
-            return histograma;
-        }
-
-        public EstatisticasImagem CalcularEstatisticas()
-        {
-            var estatisticas = new EstatisticasImagem();
-            
-            AbrirBytesImagem(bytes =>
-            {
-                var soma = 0L;
-                var listaMediana = new List<byte>();
-
-                for (int i = 0; i < bytes.GetLength(0); i++)
-                {
-                    for (int j = 0; j < bytes.GetLength(1); j += PIXEL_TAMANHO)
-                    {
-                        soma += bytes[i, j];
-                        listaMediana.Add(bytes[i, j]);
-                    }
-                }
-
-                estatisticas.Media = (int)(soma / (bytes.Length / PIXEL_TAMANHO));
-                estatisticas.Mediana = listaMediana.OrderBy(x => x).ElementAt(listaMediana.Count() / 2);
-
-                soma = 0;
-
-                for (int i = 0; i < bytes.GetLength(0); i++)
-                {
-                    for (int j = 0; j < bytes.GetLength(1); j += PIXEL_TAMANHO)
-                    {
-                        soma += (int)Math.Pow(bytes[i, j] - estatisticas.Media, 2);
-                    }
-                }
-
-                estatisticas.Variancia = (int)(soma / (bytes.Length / PIXEL_TAMANHO));
-            });
-            
-            var histograma = CalcularHistograma();
-            estatisticas.Moda = histograma.ToList().IndexOf(histograma.Max());
-            
-            return estatisticas;
-        }
-
-        private void AbrirBytesImagem(Action<byte[,]> acao)
+        public void AbrirBytesImagem(Action<byte[,]> acao)
         {
             //Explicação do LockBits: http://bobpowell.net/lockingbits.aspx
 
             var area = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-            var bitmapData = bitmap.LockBits(area, ImageLockMode.ReadWrite, PIXEL_FORMATO);
+            var bitmapData = bitmap.LockBits(area, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             
             try
             {

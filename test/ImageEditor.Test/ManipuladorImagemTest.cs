@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,69 +9,35 @@ using Xunit;
 
 namespace ImageEditor.Test
 {
-    public class ManipuladorImagemTest : IClassFixture<BitmapsFixture>
+    public class ManipuladorImagemTest
     {
-        private BitmapsFixture bitmapsParaTeste;
-
-        public ManipuladorImagemTest(BitmapsFixture bitmapsParaTeste)
-        {
-            this.bitmapsParaTeste = bitmapsParaTeste;
-        }
-
-        [Fact]
-        public void CarregarImagem_DoDisco_CarregaImagem()
-        {
-            // Arrange
-            var manipuladorImagem = new ManipuladorImagem();
-            var caminho = Directory.GetCurrentDirectory() + @"\..\..\..\..\img\Lenna.png";
-
-            // Act
-            manipuladorImagem.CarregarImagem(caminho);
-
-            // Assert
-            for (int x = 0; x < manipuladorImagem.Imagem.Width; x++)
-            {
-                for (int y = 0; y < manipuladorImagem.Imagem.Height; y++)
-                {
-                    var pixelImagemCaminho = manipuladorImagem.Imagem.GetPixel(x, y);
-                    var pixelImagemTeste = bitmapsParaTeste.Lenna.GetPixel(x, y);
-
-                    Assert.True(pixelImagemCaminho == pixelImagemTeste );
-                }
-            }
-        }
-
-        [Fact]
-        public void CarregarImagem_DoDiscoInexistente_LancaExcecao()
-        {
-            // Arrange
-            var manipuladorImagem = new ManipuladorImagem();
-            var caminho = @"C:\este_arquivo_nao_deve_existir.aaaxxxbbb";
-
-            // Act & Assert
-            Assert.Throws<FileNotFoundException>(() => manipuladorImagem.CarregarImagem(caminho));
-        }
-
         [Fact]
         public void CarregarImagem_DaMemoria_CarregaImagem()
         {
             // Arrange
             var manipuladorImagem = new ManipuladorImagem();
+            var bmp = new Bitmap(1, 1);
 
             // Act
-            manipuladorImagem.CarregarImagem(bitmapsParaTeste.Lenna);
+            manipuladorImagem.CarregarImagem(bmp);
 
             // Assert
-            Assert.True(bitmapsParaTeste.Lenna == manipuladorImagem.Imagem);
+            Assert.True(bmp == manipuladorImagem.Imagem);
         }
 
         [Fact]
         public void TransformarEscalaCinza_ComImagemColorida_RgbDeCadaPixelIgual()
         {
             // Arrange
+            var bmp = new Bitmap(2, 2);
+            bmp.SetPixel(0, 0, Color.FromArgb(0xFF, 0, 0));
+            bmp.SetPixel(1, 0, Color.FromArgb(0, 0xFF, 0));
+            bmp.SetPixel(0, 1, Color.FromArgb(0, 0, 0xFF));
+            bmp.SetPixel(1, 1, Color.FromArgb(0xDD, 0x1D, 0xFF));
+            
             var manipuladorImagem = new ManipuladorImagem();
 
-            manipuladorImagem.CarregarImagem(bitmapsParaTeste.Lenna);
+            manipuladorImagem.CarregarImagem(bmp);
 
             // Act
             manipuladorImagem.TransformarEscalaCinza();
@@ -89,39 +56,38 @@ namespace ImageEditor.Test
         }
 
         [Fact]
-        public void CalcularHistograma_ComImagemEscalaCinza_HistogramaCalculado()
+        public void AbrirBytesImagem_ImagemDaMemoria_BytesCorretos()
         {
             // Arrange
-            var manipuladorImagem = new ManipuladorImagem();
+            var bmp = new Bitmap(3, 3);
+            var seed = 0;
 
-            manipuladorImagem.CarregarImagem(bitmapsParaTeste.Histograma);
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    bmp.SetPixel(j, i, Color.FromArgb(seed++, seed++, seed++));
+                }
+            }
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bmp);
+
+            byte[,] bytes = null;
 
             // Act
-            var histograma = manipuladorImagem.CalcularHistograma();
+            manipuladorImagem.AbrirBytesImagem(x => bytes = x);
 
             // Assert
-            Assert.Equal(2, histograma[0]);
-            Assert.Equal(1, histograma[0xFF]);
+            seed = 0;
 
-            Assert.All(histograma.Take(255).Skip(1), h => Assert.Equal(0, h));
-        }
-
-        [Fact]
-        public void CalcularEstatisticas_ComImagemEscalaCinza_CalculoCorreto()
-        {
-            // Arrange
-            var manipuladorImagem = new ManipuladorImagem();
-
-            manipuladorImagem.CarregarImagem(bitmapsParaTeste.Estatisticas);
-
-            // Act
-            var estatisticas = manipuladorImagem.CalcularEstatisticas();
-
-            // Assert
-            Assert.Equal(139, estatisticas.Media);
-            Assert.Equal(128, estatisticas.Mediana);
-            Assert.Equal(254, estatisticas.Moda);
-            Assert.Equal(10426, estatisticas.Variancia);
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    Assert.Equal(seed++, bytes[i, j]);
+                }
+            }
         }
     }
 }

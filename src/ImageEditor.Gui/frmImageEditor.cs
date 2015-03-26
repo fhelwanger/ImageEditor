@@ -13,6 +13,7 @@ namespace ImageEditor.Gui
     public partial class frmImageEditor : Form
     {
         private ManipuladorImagem manipuladorImagem = new ManipuladorImagem();
+        private EstatisticasImagem estatisticasImagem = new EstatisticasImagem();
 
         public frmImageEditor()
         {
@@ -27,21 +28,38 @@ namespace ImageEditor.Gui
                 
                 if (j.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    manipuladorImagem.CarregarImagem(j.FileName);
-                    manipuladorImagem.TransformarEscalaCinza();
-                    
-                    picImagem.Image = manipuladorImagem.Imagem;
-
-                    var estatisticas = manipuladorImagem.CalcularEstatisticas();
-                    
-                    dgvEstatisticas.DataSource = new[] {
-                        new { Nome = "Média", Valor = estatisticas.Media },
-                        new { Nome = "Mediana", Valor = estatisticas.Mediana },
-                        new { Nome = "Moda", Valor = estatisticas.Moda },
-                        new { Nome = "Variância", Valor = estatisticas.Variancia }
-                    };
+                    CarregarImagem(j.FileName);
                 }
             }
+        }
+
+        private void CarregarImagem(string caminhoArquivo)
+        {
+            Bitmap bitmap;
+
+            try
+            {
+                bitmap = new Bitmap(Image.FromFile(caminhoArquivo));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Houve um erro ao abrir a imagem", "ImageEditor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            manipuladorImagem.CarregarImagem(bitmap);
+            manipuladorImagem.TransformarEscalaCinza();
+
+            estatisticasImagem.CarregarImagem(bitmap);
+
+            picImagem.Image = bitmap;
+
+            dgvEstatisticas.DataSource = new[] {
+                new { Nome = "Média", Valor = estatisticasImagem.CalcularMedia() },
+                new { Nome = "Mediana", Valor = estatisticasImagem.CalcularMediana() },
+                new { Nome = "Moda", Valor = estatisticasImagem.CalcularModa() },
+                new { Nome = "Variância", Valor = estatisticasImagem.CalcularVariancia() }
+            };
         }
 
         private void mnuHistograma_Click(object sender, EventArgs e)
@@ -52,7 +70,7 @@ namespace ImageEditor.Gui
                 return;
             }
 
-            using (var j = new frmHistograma(manipuladorImagem.CalcularHistograma()))
+            using (var j = new frmHistograma(estatisticasImagem.CalcularHistograma()))
             {
                 j.ShowDialog();
             }

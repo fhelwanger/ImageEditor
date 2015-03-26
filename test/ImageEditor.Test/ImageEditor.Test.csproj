@@ -52,7 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitmapsFixture.cs" />
+    <Compile Include="EstatisticasImagemTest.cs" />
     <Compile Include="ManipuladorImagemTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
