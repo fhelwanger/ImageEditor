@@ -131,5 +131,26 @@ namespace ImageEditor.Test
             // Assert
             Assert.Equal(10, variancia);
         }
+
+        [Fact]
+        public void ContarPixels_ImagemEscalaCinza_QuantidadeCorreta()
+        {
+            // Arrange
+            var bmp = new Bitmap(2, 2);
+
+            bmp.SetPixel(0, 0, Color.FromArgb(0xFF, 0xFF, 0xFF));
+            bmp.SetPixel(1, 0, Color.FromArgb(0x02, 0x02, 0x02));
+            bmp.SetPixel(0, 1, Color.FromArgb(0xBB, 0xBB, 0xBB));
+            bmp.SetPixel(1, 1, Color.FromArgb(0xF1, 0xF1, 0xF1));
+
+            var estatisticas = new EstatisticasImagem();
+            estatisticas.CarregarImagem(bmp);
+
+            // Act
+            var quantidade = estatisticas.ContarPixels((i, j, r, g, b) => r > 0xF0);
+
+            // Assert
+            Assert.Equal(2, quantidade);
+        }
     }
 }

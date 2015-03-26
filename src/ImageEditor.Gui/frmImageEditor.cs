@@ -52,13 +52,18 @@ namespace ImageEditor.Gui
 
             estatisticasImagem.CarregarImagem(bitmap);
 
+            var menor125abaixoDiagSec = estatisticasImagem.ContarPixels((i, j, r, g, b) => r < 125 && i > (bitmap.Width - 1) - j);
+            var maior125acimaDiagSec = estatisticasImagem.ContarPixels((i, j, r, g, b) => r > 125 && i < (bitmap.Width - 1) - j);
+
             picImagem.Image = bitmap;
 
             dgvEstatisticas.DataSource = new[] {
                 new { Nome = "Média", Valor = estatisticasImagem.CalcularMedia() },
                 new { Nome = "Mediana", Valor = estatisticasImagem.CalcularMediana() },
                 new { Nome = "Moda", Valor = estatisticasImagem.CalcularModa() },
-                new { Nome = "Variância", Valor = estatisticasImagem.CalcularVariancia() }
+                new { Nome = "Variância", Valor = estatisticasImagem.CalcularVariancia() },
+                new { Nome = "Pixels < 125 abaixo diag. sec.", Valor = menor125abaixoDiagSec },
+                new { Nome = "Pixels > 125 acima diag. sec.", Valor = maior125acimaDiagSec }
             };
         }
 

@@ -62,7 +62,7 @@
             // mnuAbrir
             // 
             this.mnuAbrir.Name = "mnuAbrir";
-            this.mnuAbrir.Size = new System.Drawing.Size(152, 22);
+            this.mnuAbrir.Size = new System.Drawing.Size(100, 22);
             this.mnuAbrir.Text = "Abrir";
             this.mnuAbrir.Click += new System.EventHandler(this.mnuAbrir_Click);
             // 
@@ -89,7 +89,7 @@
             this.picImagem.Location = new System.Drawing.Point(12, 37);
             this.picImagem.Name = "picImagem";
             this.picImagem.Size = new System.Drawing.Size(525, 358);
-            this.picImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
             // 
@@ -99,6 +99,7 @@
             this.dgvEstatisticas.AllowUserToDeleteRows = false;
             this.dgvEstatisticas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvEstatisticas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvEstatisticas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEstatisticas.Location = new System.Drawing.Point(562, 37);
             this.dgvEstatisticas.Name = "dgvEstatisticas";

@@ -100,5 +100,26 @@ namespace ImageEditor
             
             return (int)(soma / quantidade);
         }
+
+        public int ContarPixels(Func<int, int, int, int, int, bool> condicao)
+        {
+            var quantidade = 0;
+
+            manipuladorImagem.AbrirBytesImagem(bytes =>
+            {
+                for (int i = 0; i < bytes.GetLength(0); i++)
+                {
+                    for (int j = 0; j < bytes.GetLength(1); j += 3)
+                    {
+                        if (condicao(i, j / 3, bytes[i, j], bytes[i, j + 1], bytes[i, j + 2]))
+                        {
+                            quantidade++;
+                        }
+                    }
+                }
+            });
+
+            return quantidade;
+        }
     }
 }
