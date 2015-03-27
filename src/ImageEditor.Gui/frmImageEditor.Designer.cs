@@ -35,6 +35,13 @@
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
             this.dgvEstatisticas = new System.Windows.Forms.DataGridView();
+            this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuThreshold1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuThreshold2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuThreshold3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuThreshold4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuThreshold5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstatisticas)).BeginInit();
@@ -44,6 +51,7 @@
             // 
             this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.arquivoToolStripMenuItem,
+            this.editarToolStripMenuItem,
             this.visualizarToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
@@ -62,7 +70,7 @@
             // mnuAbrir
             // 
             this.mnuAbrir.Name = "mnuAbrir";
-            this.mnuAbrir.Size = new System.Drawing.Size(100, 22);
+            this.mnuAbrir.Size = new System.Drawing.Size(152, 22);
             this.mnuAbrir.Text = "Abrir";
             this.mnuAbrir.Click += new System.EventHandler(this.mnuAbrir_Click);
             // 
@@ -77,7 +85,7 @@
             // mnuHistograma
             // 
             this.mnuHistograma.Name = "mnuHistograma";
-            this.mnuHistograma.Size = new System.Drawing.Size(136, 22);
+            this.mnuHistograma.Size = new System.Drawing.Size(152, 22);
             this.mnuHistograma.Text = "Histograma";
             this.mnuHistograma.Click += new System.EventHandler(this.mnuHistograma_Click);
             // 
@@ -107,6 +115,61 @@
             this.dgvEstatisticas.RowHeadersVisible = false;
             this.dgvEstatisticas.Size = new System.Drawing.Size(271, 358);
             this.dgvEstatisticas.TabIndex = 2;
+            // 
+            // editarToolStripMenuItem
+            // 
+            this.editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thresholdToolStripMenuItem});
+            this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.editarToolStripMenuItem.Text = "Editar";
+            // 
+            // thresholdToolStripMenuItem
+            // 
+            this.thresholdToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuThreshold1,
+            this.mnuThreshold2,
+            this.mnuThreshold3,
+            this.mnuThreshold4,
+            this.mnuThreshold5});
+            this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.thresholdToolStripMenuItem.Text = "Threshold";
+            // 
+            // mnuThreshold1
+            // 
+            this.mnuThreshold1.Name = "mnuThreshold1";
+            this.mnuThreshold1.Size = new System.Drawing.Size(492, 22);
+            this.mnuThreshold1.Text = "Valores maiores ou iguais a média recebem preto";
+            this.mnuThreshold1.Click += new System.EventHandler(this.mnuThreshold1_Click);
+            // 
+            // mnuThreshold2
+            // 
+            this.mnuThreshold2.Name = "mnuThreshold2";
+            this.mnuThreshold2.Size = new System.Drawing.Size(492, 22);
+            this.mnuThreshold2.Text = "Valores maiores ou iguais a moda recebem 100";
+            this.mnuThreshold2.Click += new System.EventHandler(this.mnuThreshold2_Click);
+            // 
+            // mnuThreshold3
+            // 
+            this.mnuThreshold3.Name = "mnuThreshold3";
+            this.mnuThreshold3.Size = new System.Drawing.Size(492, 22);
+            this.mnuThreshold3.Text = "Valores maiores ou iguais a mediana recebem branco";
+            this.mnuThreshold3.Click += new System.EventHandler(this.mnuThreshold3_Click);
+            // 
+            // mnuThreshold4
+            // 
+            this.mnuThreshold4.Name = "mnuThreshold4";
+            this.mnuThreshold4.Size = new System.Drawing.Size(492, 22);
+            this.mnuThreshold4.Text = "Valores menores que a média recebem 50";
+            this.mnuThreshold4.Click += new System.EventHandler(this.mnuThreshold4_Click);
+            // 
+            // mnuThreshold5
+            // 
+            this.mnuThreshold5.Name = "mnuThreshold5";
+            this.mnuThreshold5.Size = new System.Drawing.Size(492, 22);
+            this.mnuThreshold5.Text = "Valores maiores que a mediana recebem 255 e menores que a média recebem 0";
+            this.mnuThreshold5.Click += new System.EventHandler(this.mnuThreshold5_Click);
             // 
             // frmImageEditor
             // 
@@ -138,6 +201,13 @@
         private System.Windows.Forms.ToolStripMenuItem visualizarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuHistograma;
         private System.Windows.Forms.DataGridView dgvEstatisticas;
+        private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thresholdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuThreshold1;
+        private System.Windows.Forms.ToolStripMenuItem mnuThreshold2;
+        private System.Windows.Forms.ToolStripMenuItem mnuThreshold3;
+        private System.Windows.Forms.ToolStripMenuItem mnuThreshold4;
+        private System.Windows.Forms.ToolStripMenuItem mnuThreshold5;
 
     }
 }

@@ -25,7 +25,7 @@ namespace ImageEditor
 
         public void CarregarImagem(Bitmap bitmap)
         {
-            if (this.bitmap != null)
+            if (this.bitmap != null && this.bitmap != bitmap)
             {
                 this.bitmap.Dispose();
             }
