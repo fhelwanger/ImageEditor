@@ -25,12 +25,7 @@ namespace ImageEditor
 
         public void CarregarImagem(Bitmap bitmap)
         {
-            if (this.bitmap != null && this.bitmap != bitmap)
-            {
-                this.bitmap.Dispose();
-            }
-
-            this.bitmap = bitmap;
+            this.bitmap = new Bitmap(bitmap);
         }
 
         public void TransformarEscalaCinza()

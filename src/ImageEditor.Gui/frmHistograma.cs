@@ -12,18 +12,21 @@ namespace ImageEditor.Gui
 {
     public partial class frmHistograma : Form
     {
-        private int[] dados;
+        private EstatisticasImagem estatisticasImagem = new EstatisticasImagem();
 
-        public frmHistograma(int[] dados)
+        public frmHistograma()
         {
-            this.dados = dados;
-
             InitializeComponent();
+        }
+
+        public void CarregarImagem(Bitmap bitmap)
+        {
+            estatisticasImagem.CarregarImagem(bitmap);
         }
 
         private void frmHistograma_Load(object sender, EventArgs e)
         {
-            crtHistograma.DataSource = dados.Select((x, i) => new KeyValuePair<int, int>(i, x)); ;
+            crtHistograma.DataSource = estatisticasImagem.CalcularHistograma().Select((x, i) => new KeyValuePair<int, int>(i, x)); ;
             crtHistograma.Series[0].XValueMember = "Key";
             crtHistograma.Series[0].YValueMembers = "Value";
             crtHistograma.Series[0]["PointWidth"] = "1";

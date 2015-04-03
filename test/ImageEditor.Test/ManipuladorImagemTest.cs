@@ -12,51 +12,20 @@ namespace ImageEditor.Test
     public class ManipuladorImagemTest
     {
         [Fact]
-        public void CarregarImagem_DaMemoria_CarregaImagem()
+        public void CarregarImagem_DaMemoria_CarregaCopiaImagem()
         {
             // Arrange
             var manipuladorImagem = new ManipuladorImagem();
             var bmp = new Bitmap(1, 1);
+            bmp.SetPixel(0, 0, Color.Red);
 
             // Act
             manipuladorImagem.CarregarImagem(bmp);
             
             // Assert
-            Assert.Equal(bmp, manipuladorImagem.Imagem);
-        }
-
-        [Fact]
-        public void CarregarImagem_OutraImagem_DescartaAntiga()
-        {
-            // Arrange
-            var manipuladorImagem = new ManipuladorImagem();
-            var bmp1 = new Bitmap(1, 1);
-            var bmp2 = new Bitmap(1, 1);
-
-            // Act
-            manipuladorImagem.CarregarImagem(bmp1);
-            manipuladorImagem.CarregarImagem(bmp2);
-
-            // Assert
-            Assert.Equal(bmp2, manipuladorImagem.Imagem);
-            Assert.Equal(1, bmp2.Width);
-            Assert.Throws<ArgumentException>(() => bmp1.Width);
-        }
-
-        [Fact]
-        public void CarregarImagem_MesmaImagem_NaoDescarta()
-        {
-            // Arrange
-            var manipuladorImagem = new ManipuladorImagem();
-            var bmp = new Bitmap(1, 1);
-
-            // Act
-            manipuladorImagem.CarregarImagem(bmp);
-            manipuladorImagem.CarregarImagem(bmp);
-
-            // Assert
-            Assert.Equal(bmp, manipuladorImagem.Imagem);
-            Assert.Equal(1, bmp.Width);
+            Assert.Equal(bmp.Width, manipuladorImagem.Imagem.Width);
+            Assert.Equal(bmp.Height, manipuladorImagem.Imagem.Height);
+            Assert.Equal(bmp.GetPixel(0, 0), manipuladorImagem.Imagem.GetPixel(0, 0));
         }
 
         [Fact]
@@ -149,10 +118,10 @@ namespace ImageEditor.Test
             });
 
             // Assert
-            Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), bmp.GetPixel(0, 0));
-            Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), bmp.GetPixel(1, 0));
-            Assert.Equal(Color.FromArgb(0, 0, 0), bmp.GetPixel(0, 1));
-            Assert.Equal(Color.FromArgb(0, 0, 0), bmp.GetPixel(1, 1));
+            Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), manipuladorImagem.Imagem.GetPixel(0, 0));
+            Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), manipuladorImagem.Imagem.GetPixel(1, 0));
+            Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(0, 1));
+            Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(1, 1));
         }
     }
 }

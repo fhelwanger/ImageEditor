@@ -11,6 +11,14 @@ namespace ImageEditor
     {
         private ManipuladorImagem manipuladorImagem = new ManipuladorImagem();
 
+        public Bitmap Imagem
+        {
+            get
+            {
+                return manipuladorImagem.Imagem;
+            }
+        }
+
         public void CarregarImagem(Bitmap bitmap)
         {
             manipuladorImagem.CarregarImagem(bitmap);

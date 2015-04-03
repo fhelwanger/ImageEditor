@@ -12,15 +12,14 @@ namespace ImageEditor.Gui
 {
     public partial class frmImageEditor : Form
     {
-        private ManipuladorImagem manipuladorImagem = new ManipuladorImagem();
-        private EstatisticasImagem estatisticasImagem = new EstatisticasImagem();
+        private Bitmap bitmap = null;
 
         public frmImageEditor()
         {
             InitializeComponent();
         }
 
-        private void mnuAbrir_Click(object sender, EventArgs e)
+        private void mnuAbrirEscalaCinza_Click(object sender, EventArgs e)
         {
             using (var j = new OpenFileDialog())
             {
@@ -31,7 +30,12 @@ namespace ImageEditor.Gui
                     try
                     {
                         var bitmap = new Bitmap(Image.FromFile(j.FileName));
-                        CarregarImagem(bitmap);
+                        
+                        var manipulador = new ManipuladorImagem();
+                        manipulador.CarregarImagem(bitmap);
+                        manipulador.TransformarEscalaCinza();
+
+                        CarregarImagem(manipulador.Imagem);
                     }
                     catch (Exception)
                     {
@@ -43,170 +47,193 @@ namespace ImageEditor.Gui
 
         private void CarregarImagem(Bitmap bitmap)
         {
-            manipuladorImagem.CarregarImagem(bitmap);
-            manipuladorImagem.TransformarEscalaCinza();
-
-            estatisticasImagem.CarregarImagem(bitmap);
-
-            var menor125abaixoDiagSec = estatisticasImagem.ContarPixels((i, j, r, g, b) => r < 125 && i > (bitmap.Width - 1) - j);
-            var maior125acimaDiagSec = estatisticasImagem.ContarPixels((i, j, r, g, b) => r > 125 && i < (bitmap.Width - 1) - j);
-
-            picImagem.Image = bitmap;
-
-            dgvEstatisticas.DataSource = new[] {
-                new { Nome = "Média", Valor = estatisticasImagem.CalcularMedia() },
-                new { Nome = "Mediana", Valor = estatisticasImagem.CalcularMediana() },
-                new { Nome = "Moda", Valor = estatisticasImagem.CalcularModa() },
-                new { Nome = "Variância", Valor = estatisticasImagem.CalcularVariancia() },
-                new { Nome = "Pixels < 125 abaixo diag. sec.", Valor = menor125abaixoDiagSec },
-                new { Nome = "Pixels > 125 acima diag. sec.", Valor = maior125acimaDiagSec }
-            };
+            this.bitmap = bitmap;
+            picImagem.Image = this.bitmap;
         }
 
         private void mnuHistograma_Click(object sender, EventArgs e)
         {
-            if (manipuladorImagem.Imagem == null)
+            if (!ConsistirImagemSelecionada())
             {
-                MessageBox.Show("Selecione uma imagem", "ImageEditor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            using (var j = new frmHistograma(estatisticasImagem.CalcularHistograma()))
+            var j = new frmHistograma();
+            j.CarregarImagem(bitmap);
+            j.Show();
+        }
+
+        private void mnuEstatisticas_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemSelecionada())
             {
-                j.ShowDialog();
+                return;
             }
+
+            var j = new frmEstatisticas();
+            j.CarregarImagem(bitmap);
+            j.Show();
         }
 
         private void mnuThreshold1_Click(object sender, EventArgs e)
         {
             // Valores maiores ou iguais a média recebem preto
-            
-            var media = estatisticasImagem.CalcularMedia();
-
-            manipuladorImagem.AbrirBytesImagem(bytes =>
+            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
             {
-                for (int i = 0; i < bytes.GetLength(0); i++)
+                var media = estatisticasImagem.CalcularMedia();
+
+                manipuladorImagem.AbrirBytesImagem(bytes =>
                 {
-                    for (int j = 0; j < bytes.GetLength(1); j += 3)
+                    for (int i = 0; i < bytes.GetLength(0); i++)
                     {
-                        if (bytes[i, j] >= media)
+                        for (int j = 0; j < bytes.GetLength(1); j += 3)
                         {
-                            bytes[i, j + 0] = 0;
-                            bytes[i, j + 1] = 0;
-                            bytes[i, j + 2] = 0;
+                            if (bytes[i, j] >= media)
+                            {
+                                bytes[i, j + 0] = 0;
+                                bytes[i, j + 1] = 0;
+                                bytes[i, j + 2] = 0;
+                            }
                         }
                     }
-                }
+                });
             });
-
-            CarregarImagem(manipuladorImagem.Imagem);
         }
 
         private void mnuThreshold2_Click(object sender, EventArgs e)
         {
             // Valores maiores ou iguais a moda recebem 100
-
-            var moda = estatisticasImagem.CalcularModa();
-
-            manipuladorImagem.AbrirBytesImagem(bytes =>
+            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
             {
-                for (int i = 0; i < bytes.GetLength(0); i++)
+                var moda = estatisticasImagem.CalcularModa();
+
+                manipuladorImagem.AbrirBytesImagem(bytes =>
                 {
-                    for (int j = 0; j < bytes.GetLength(1); j += 3)
+                    for (int i = 0; i < bytes.GetLength(0); i++)
                     {
-                        if (bytes[i, j] >= moda)
+                        for (int j = 0; j < bytes.GetLength(1); j += 3)
                         {
-                            bytes[i, j + 0] = 100;
-                            bytes[i, j + 1] = 100;
-                            bytes[i, j + 2] = 100;
+                            if (bytes[i, j] >= moda)
+                            {
+                                bytes[i, j + 0] = 100;
+                                bytes[i, j + 1] = 100;
+                                bytes[i, j + 2] = 100;
+                            }
                         }
                     }
-                }
+                });
             });
-
-            CarregarImagem(manipuladorImagem.Imagem);
         }
 
         private void mnuThreshold3_Click(object sender, EventArgs e)
         {
             // Valores maiores ou iguais a mediana recebem branco
-
-            var mediana = estatisticasImagem.CalcularMediana();
-
-            manipuladorImagem.AbrirBytesImagem(bytes =>
+            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
             {
-                for (int i = 0; i < bytes.GetLength(0); i++)
+                var mediana = estatisticasImagem.CalcularMediana();
+
+                manipuladorImagem.AbrirBytesImagem(bytes =>
                 {
-                    for (int j = 0; j < bytes.GetLength(1); j += 3)
+                    for (int i = 0; i < bytes.GetLength(0); i++)
                     {
-                        if (bytes[i, j] >= mediana)
+                        for (int j = 0; j < bytes.GetLength(1); j += 3)
                         {
-                            bytes[i, j + 0] = 255;
-                            bytes[i, j + 1] = 255;
-                            bytes[i, j + 2] = 255;
+                            if (bytes[i, j] >= mediana)
+                            {
+                                bytes[i, j + 0] = 255;
+                                bytes[i, j + 1] = 255;
+                                bytes[i, j + 2] = 255;
+                            }
                         }
                     }
-                }
+                });
             });
-
-            CarregarImagem(manipuladorImagem.Imagem);
         }
 
         private void mnuThreshold4_Click(object sender, EventArgs e)
         {
             // Valores menores que a média recebem 50
-
-            var media = estatisticasImagem.CalcularMedia();
-
-            manipuladorImagem.AbrirBytesImagem(bytes =>
+            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
             {
-                for (int i = 0; i < bytes.GetLength(0); i++)
+                var media = estatisticasImagem.CalcularMedia();
+
+                manipuladorImagem.AbrirBytesImagem(bytes =>
                 {
-                    for (int j = 0; j < bytes.GetLength(1); j += 3)
+                    for (int i = 0; i < bytes.GetLength(0); i++)
                     {
-                        if (bytes[i, j] < media)
+                        for (int j = 0; j < bytes.GetLength(1); j += 3)
                         {
-                            bytes[i, j + 0] = 50;
-                            bytes[i, j + 1] = 50;
-                            bytes[i, j + 2] = 50;
+                            if (bytes[i, j] < media)
+                            {
+                                bytes[i, j + 0] = 50;
+                                bytes[i, j + 1] = 50;
+                                bytes[i, j + 2] = 50;
+                            }
                         }
                     }
-                }
+                });
             });
-
-            CarregarImagem(manipuladorImagem.Imagem);
         }
 
         private void mnuThreshold5_Click(object sender, EventArgs e)
         {
             // Valores maiores que a mediana recebem 255 e menores que a média recebem 0
-
-            var media = estatisticasImagem.CalcularMedia();
-            var mediana = estatisticasImagem.CalcularMediana();
-
-            manipuladorImagem.AbrirBytesImagem(bytes =>
+            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
             {
-                for (int i = 0; i < bytes.GetLength(0); i++)
+                var media = estatisticasImagem.CalcularMedia();
+                var mediana = estatisticasImagem.CalcularMediana();
+
+                manipuladorImagem.AbrirBytesImagem(bytes =>
                 {
-                    for (int j = 0; j < bytes.GetLength(1); j += 3)
+                    for (int i = 0; i < bytes.GetLength(0); i++)
                     {
-                        if (bytes[i, j] > mediana)
+                        for (int j = 0; j < bytes.GetLength(1); j += 3)
                         {
-                            bytes[i, j + 0] = 255;
-                            bytes[i, j + 1] = 255;
-                            bytes[i, j + 2] = 255;
-                        }
-                        else if (bytes[i, j] < media)
-                        {
-                            bytes[i, j + 0] = 0;
-                            bytes[i, j + 1] = 0;
-                            bytes[i, j + 2] = 0;
+                            if (bytes[i, j] > mediana)
+                            {
+                                bytes[i, j + 0] = 255;
+                                bytes[i, j + 1] = 255;
+                                bytes[i, j + 2] = 255;
+                            }
+                            else if (bytes[i, j] < media)
+                            {
+                                bytes[i, j + 0] = 0;
+                                bytes[i, j + 1] = 0;
+                                bytes[i, j + 2] = 0;
+                            }
                         }
                     }
-                }
+                });
             });
+        }
 
-            CarregarImagem(manipuladorImagem.Imagem);
+        private void AplicarTransformacao(Action<ManipuladorImagem, EstatisticasImagem> transformacao)
+        {
+            if (!ConsistirImagemSelecionada())
+            {
+                return;
+            }
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bitmap);
+
+            var estatisticasImagem = new EstatisticasImagem();
+            estatisticasImagem.CarregarImagem(bitmap);
+
+            transformacao(manipuladorImagem, estatisticasImagem);
+
+            picImagem.Image = manipuladorImagem.Imagem;
+        }
+
+        private bool ConsistirImagemSelecionada()
+        {
+            if (bitmap == null)
+            {
+                MessageBox.Show("Selecione uma imagem.", "ImageEditor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return true;
         }
     }
 }

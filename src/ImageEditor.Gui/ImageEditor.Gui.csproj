@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmEstatisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEstatisticas.Designer.cs">
+      <DependentUpon>frmEstatisticas.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHistograma.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +65,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmEstatisticas.resx">
+      <DependentUpon>frmEstatisticas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHistograma.resx">
       <DependentUpon>frmHistograma.cs</DependentUpon>
     </EmbeddedResource>
