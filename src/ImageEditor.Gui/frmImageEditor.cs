@@ -13,29 +13,54 @@ namespace ImageEditor.Gui
     public partial class frmImageEditor : Form
     {
         private Bitmap bitmap = null;
+        private bool colorida;
 
         public frmImageEditor()
         {
             InitializeComponent();
         }
 
+        private void mnuAbrirColorida_Click(object sender, EventArgs e)
+        {
+            var bitmap = AbrirImagem();
+
+            if (bitmap == null)
+            {
+                return;
+            }
+
+            colorida = true;
+            CarregarImagem(bitmap);
+        }
+
         private void mnuAbrirEscalaCinza_Click(object sender, EventArgs e)
+        {
+            var bitmap = AbrirImagem();
+
+            if (bitmap == null)
+            {
+                return;
+            }
+
+            var manipulador = new ManipuladorImagem();
+            manipulador.CarregarImagem(bitmap);
+            manipulador.TransformarEscalaCinza();
+
+            colorida = false;
+            CarregarImagem(manipulador.Imagem);
+        }
+
+        private Bitmap AbrirImagem()
         {
             using (var j = new OpenFileDialog())
             {
                 j.Filter = "Imagens | *.jpg; *.jpeg; *.png; *.bmp; *.gif | Todos os arquivos| *";
-                
+
                 if (j.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     try
                     {
-                        var bitmap = new Bitmap(Image.FromFile(j.FileName));
-                        
-                        var manipulador = new ManipuladorImagem();
-                        manipulador.CarregarImagem(bitmap);
-                        manipulador.TransformarEscalaCinza();
-
-                        CarregarImagem(manipulador.Imagem);
+                        return new Bitmap(Image.FromFile(j.FileName));
                     }
                     catch (Exception)
                     {
@@ -43,6 +68,8 @@ namespace ImageEditor.Gui
                     }
                 }
             }
+
+            return null;
         }
 
         private void CarregarImagem(Bitmap bitmap)
@@ -53,7 +80,7 @@ namespace ImageEditor.Gui
 
         private void mnuHistograma_Click(object sender, EventArgs e)
         {
-            if (!ConsistirImagemSelecionada())
+            if (!ConsistirImagemEscalaCinzaSelecionada())
             {
                 return;
             }
@@ -65,7 +92,7 @@ namespace ImageEditor.Gui
 
         private void mnuEstatisticas_Click(object sender, EventArgs e)
         {
-            if (!ConsistirImagemSelecionada())
+            if (!ConsistirImagemEscalaCinzaSelecionada())
             {
                 return;
             }
@@ -78,7 +105,7 @@ namespace ImageEditor.Gui
         private void mnuThreshold1_Click(object sender, EventArgs e)
         {
             // Valores maiores ou iguais a média recebem preto
-            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
+            AplicarThreshold((manipuladorImagem, estatisticasImagem) =>
             {
                 var media = estatisticasImagem.CalcularMedia();
 
@@ -103,7 +130,7 @@ namespace ImageEditor.Gui
         private void mnuThreshold2_Click(object sender, EventArgs e)
         {
             // Valores maiores ou iguais a moda recebem 100
-            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
+            AplicarThreshold((manipuladorImagem, estatisticasImagem) =>
             {
                 var moda = estatisticasImagem.CalcularModa();
 
@@ -128,7 +155,7 @@ namespace ImageEditor.Gui
         private void mnuThreshold3_Click(object sender, EventArgs e)
         {
             // Valores maiores ou iguais a mediana recebem branco
-            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
+            AplicarThreshold((manipuladorImagem, estatisticasImagem) =>
             {
                 var mediana = estatisticasImagem.CalcularMediana();
 
@@ -153,7 +180,7 @@ namespace ImageEditor.Gui
         private void mnuThreshold4_Click(object sender, EventArgs e)
         {
             // Valores menores que a média recebem 50
-            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
+            AplicarThreshold((manipuladorImagem, estatisticasImagem) =>
             {
                 var media = estatisticasImagem.CalcularMedia();
 
@@ -178,7 +205,7 @@ namespace ImageEditor.Gui
         private void mnuThreshold5_Click(object sender, EventArgs e)
         {
             // Valores maiores que a mediana recebem 255 e menores que a média recebem 0
-            AplicarTransformacao((manipuladorImagem, estatisticasImagem) =>
+            AplicarThreshold((manipuladorImagem, estatisticasImagem) =>
             {
                 var media = estatisticasImagem.CalcularMedia();
                 var mediana = estatisticasImagem.CalcularMediana();
@@ -207,9 +234,9 @@ namespace ImageEditor.Gui
             });
         }
 
-        private void AplicarTransformacao(Action<ManipuladorImagem, EstatisticasImagem> transformacao)
+        private void AplicarThreshold(Action<ManipuladorImagem, EstatisticasImagem> transformacao)
         {
-            if (!ConsistirImagemSelecionada())
+            if (!ConsistirImagemEscalaCinzaSelecionada())
             {
                 return;
             }
@@ -223,6 +250,22 @@ namespace ImageEditor.Gui
             transformacao(manipuladorImagem, estatisticasImagem);
 
             picImagem.Image = manipuladorImagem.Imagem;
+        }
+
+        private bool ConsistirImagemEscalaCinzaSelecionada()
+        {
+            if (!ConsistirImagemSelecionada())
+            {
+                return false;
+            }
+
+            if (colorida)
+            {
+                MessageBox.Show("Função disponível somente para imagens em escala de cinza.", "ImageEditor", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return true;
         }
 
         private bool ConsistirImagemSelecionada()
