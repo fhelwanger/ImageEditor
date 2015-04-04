@@ -56,7 +56,7 @@ namespace ImageEditor.Gui
             {
                 j.Filter = "Imagens | *.jpg; *.jpeg; *.png; *.bmp; *.gif | Todos os arquivos| *";
 
-                if (j.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (j.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
@@ -250,6 +250,21 @@ namespace ImageEditor.Gui
             transformacao(manipuladorImagem, estatisticasImagem);
 
             picImagem.Image = manipuladorImagem.Imagem;
+        }
+
+        private void mnuTranslacao_Click(object sender, EventArgs e)
+        {
+            using (var j = new frmTranslacao())
+            {
+                if (j.ShowDialog() == DialogResult.OK)
+                {
+                    var manipulador = new ManipuladorImagem();
+                    manipulador.CarregarImagem(bitmap);
+                    manipulador.Transladar(j.Horizontal, j.Vertical);
+
+                    picImagem.Image = manipulador.Imagem;
+                }
+            }
         }
 
         private bool ConsistirImagemEscalaCinzaSelecionada()

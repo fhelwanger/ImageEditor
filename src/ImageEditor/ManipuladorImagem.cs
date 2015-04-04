@@ -48,6 +48,47 @@ namespace ImageEditor
             });
         }
 
+        public void Transladar(int horizontal, int vertical)
+        {
+            var matrizTranslacao = new int[,] {
+                {1, 0, 0},
+                {0, 1, 0},
+                {vertical, horizontal * 3, 1}
+            };
+
+            AbrirBytesImagem(bytes =>
+            {
+                var copia = (byte[,])bytes.Clone();
+
+                for (int i = 0; i < bytes.GetLength(0); i++)
+                {
+                    for (int j = 0; j < bytes.GetLength(1); j++)
+                    {
+                        bytes[i, j] = 0xFF;
+                    }
+                }
+
+                for (int i = 0; i < copia.GetLength(0); i++)
+                {
+                    for (int j = 0; j < copia.GetLength(1); j += 3)
+                    {
+                        var posicao = new int[,] {
+                            {i, j, 1}
+                        };
+
+                        var novaPosicao = MultiplicarMatrizes(posicao, matrizTranslacao);
+
+                        if (novaPosicao[0, 0] < 0 || novaPosicao[0, 0] > bytes.GetUpperBound(0)) continue;
+                        if (novaPosicao[0, 1] < 0 || novaPosicao[0, 1] > bytes.GetUpperBound(1)) continue;
+
+                        bytes[novaPosicao[0, 0], novaPosicao[0, 1]] = copia[posicao[0, 0], posicao[0, 1]];
+                        bytes[novaPosicao[0, 0], novaPosicao[0, 1] + 1] = copia[posicao[0, 0], posicao[0, 1] + 1];
+                        bytes[novaPosicao[0, 0], novaPosicao[0, 1] + 2] = copia[posicao[0, 0], posicao[0, 1] + 2];
+                    }
+                }
+            });
+        }
+
         public void AbrirBytesImagem(Action<byte[,]> acao)
         {
             //Explicação do LockBits: http://bobpowell.net/lockingbits.aspx
@@ -101,6 +142,33 @@ namespace ImageEditor
                     linha[x * PIXEL_TAMANHO + 2] = bytes[y, x * PIXEL_TAMANHO + 0];
                 }
             }
+        }
+
+        private int[,] MultiplicarMatrizes(int[,] matrizA, int[,] matrizB)
+        {
+            if (matrizA.GetLength(1) != matrizB.GetLength(0))
+            {
+                throw new InvalidOperationException("Número de colunas da matriz A deve ser igual ao número de linhas da matriz B");
+            }
+
+            int[,] resultado = new int[matrizA.GetLength(0), matrizB.GetLength(1)];
+
+            for (int i = 0; i < matrizA.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrizB.GetLength(0); j++)
+                {
+                    var soma = 0;
+
+                    for (int k = 0; k < matrizB.GetLength(0); k++)
+                    {
+                        soma += matrizA[i, k] * matrizB[k, j];
+                    }
+
+                    resultado[i, j] = soma;
+                }
+            }
+
+            return resultado;
         }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.menu = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAbrirColorida = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbrirEscalaCinza = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,7 +43,7 @@
             this.mnuEstatisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
-            this.mnuAbrirColorida = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTranslacao = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
@@ -68,6 +69,13 @@
             this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.arquivoToolStripMenuItem.Text = "Arquivo";
             // 
+            // mnuAbrirColorida
+            // 
+            this.mnuAbrirColorida.Name = "mnuAbrirColorida";
+            this.mnuAbrirColorida.Size = new System.Drawing.Size(181, 22);
+            this.mnuAbrirColorida.Text = "Abrir colorida";
+            this.mnuAbrirColorida.Click += new System.EventHandler(this.mnuAbrirColorida_Click);
+            // 
             // mnuAbrirEscalaCinza
             // 
             this.mnuAbrirEscalaCinza.Name = "mnuAbrirEscalaCinza";
@@ -78,7 +86,8 @@
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.thresholdToolStripMenuItem});
+            this.thresholdToolStripMenuItem,
+            this.mnuTranslacao});
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.editarToolStripMenuItem.Text = "Editar";
@@ -92,7 +101,7 @@
             this.mnuThreshold4,
             this.mnuThreshold5});
             this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
-            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.thresholdToolStripMenuItem.Text = "Threshold";
             // 
             // mnuThreshold1
@@ -165,12 +174,12 @@
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
             // 
-            // mnuAbrirColorida
+            // mnuTranslacao
             // 
-            this.mnuAbrirColorida.Name = "mnuAbrirColorida";
-            this.mnuAbrirColorida.Size = new System.Drawing.Size(181, 22);
-            this.mnuAbrirColorida.Text = "Abrir colorida";
-            this.mnuAbrirColorida.Click += new System.EventHandler(this.mnuAbrirColorida_Click);
+            this.mnuTranslacao.Name = "mnuTranslacao";
+            this.mnuTranslacao.Size = new System.Drawing.Size(152, 22);
+            this.mnuTranslacao.Text = "Translação";
+            this.mnuTranslacao.Click += new System.EventHandler(this.mnuTranslacao_Click);
             // 
             // frmImageEditor
             // 
@@ -208,6 +217,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuThreshold5;
         private System.Windows.Forms.ToolStripMenuItem mnuEstatisticas;
         private System.Windows.Forms.ToolStripMenuItem mnuAbrirColorida;
+        private System.Windows.Forms.ToolStripMenuItem mnuTranslacao;
 
     }
 }
