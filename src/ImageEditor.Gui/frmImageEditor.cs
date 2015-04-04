@@ -50,6 +50,16 @@ namespace ImageEditor.Gui
             CarregarImagem(manipulador.Imagem);
         }
 
+        private void mnuFechar_Click(object sender, EventArgs e)
+        {
+            CarregarImagem(null);
+        }
+
+        private void mnuSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private Bitmap AbrirImagem()
         {
             using (var j = new OpenFileDialog())
