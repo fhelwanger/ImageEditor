@@ -78,6 +78,7 @@ namespace ImageEditor.Test
             Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), manipuladorImagem.Imagem.GetPixel(0, 0));
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(1, 0));
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(2, 0));
+            Assert.Equal(bmp.Size, manipuladorImagem.Imagem.Size);
         }
 
         [Fact]
@@ -100,6 +101,7 @@ namespace ImageEditor.Test
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(0, 0));
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(1, 0));
             Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), manipuladorImagem.Imagem.GetPixel(2, 0));
+            Assert.Equal(bmp.Size, manipuladorImagem.Imagem.Size);
         }
 
         [Fact]
@@ -122,6 +124,7 @@ namespace ImageEditor.Test
             Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), manipuladorImagem.Imagem.GetPixel(0, 0));
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(0, 1));
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(0, 2));
+            Assert.Equal(bmp.Size, manipuladorImagem.Imagem.Size);
         }
 
         [Fact]
@@ -144,6 +147,7 @@ namespace ImageEditor.Test
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(0, 0));
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(0, 1));
             Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), manipuladorImagem.Imagem.GetPixel(0, 2));
+            Assert.Equal(bmp.Size, manipuladorImagem.Imagem.Size);
         }
 
         [Fact]
