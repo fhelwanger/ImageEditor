@@ -39,11 +39,13 @@
             this.mnuThreshold3 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuThreshold4 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuThreshold5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTranslacao = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEstatisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
-            this.mnuTranslacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEspelhamento = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
@@ -87,7 +89,9 @@
             // 
             this.editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.thresholdToolStripMenuItem,
-            this.mnuTranslacao});
+            this.toolStripSeparator1,
+            this.mnuTranslacao,
+            this.mnuEspelhamento});
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.editarToolStripMenuItem.Text = "Editar";
@@ -139,6 +143,13 @@
             this.mnuThreshold5.Text = "Valores maiores que a mediana recebem 255 e menores que a média recebem 0";
             this.mnuThreshold5.Click += new System.EventHandler(this.mnuThreshold5_Click);
             // 
+            // mnuTranslacao
+            // 
+            this.mnuTranslacao.Name = "mnuTranslacao";
+            this.mnuTranslacao.Size = new System.Drawing.Size(152, 22);
+            this.mnuTranslacao.Text = "Translação";
+            this.mnuTranslacao.Click += new System.EventHandler(this.mnuTranslacao_Click);
+            // 
             // visualizarToolStripMenuItem
             // 
             this.visualizarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -174,12 +185,17 @@
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
             // 
-            // mnuTranslacao
+            // mnuEspelhamento
             // 
-            this.mnuTranslacao.Name = "mnuTranslacao";
-            this.mnuTranslacao.Size = new System.Drawing.Size(152, 22);
-            this.mnuTranslacao.Text = "Translação";
-            this.mnuTranslacao.Click += new System.EventHandler(this.mnuTranslacao_Click);
+            this.mnuEspelhamento.Name = "mnuEspelhamento";
+            this.mnuEspelhamento.Size = new System.Drawing.Size(152, 22);
+            this.mnuEspelhamento.Text = "Espelhamento";
+            this.mnuEspelhamento.Click += new System.EventHandler(this.mnuEspelhamento_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // frmImageEditor
             // 
@@ -218,6 +234,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuEstatisticas;
         private System.Windows.Forms.ToolStripMenuItem mnuAbrirColorida;
         private System.Windows.Forms.ToolStripMenuItem mnuTranslacao;
+        private System.Windows.Forms.ToolStripMenuItem mnuEspelhamento;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 
     }
 }

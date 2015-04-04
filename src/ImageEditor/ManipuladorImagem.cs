@@ -11,6 +11,12 @@ namespace ImageEditor
 {
     public class ManipuladorImagem
     {
+        public enum TipoEspelhamento
+        {
+            Horizontal,
+            Vertical
+        }
+
         private const int PIXEL_TAMANHO = 3;
 
         private Bitmap bitmap;
@@ -80,6 +86,54 @@ namespace ImageEditor
 
                         if (novaPosicao[0, 0] < 0 || novaPosicao[0, 0] > bytes.GetUpperBound(0)) continue;
                         if (novaPosicao[0, 1] < 0 || novaPosicao[0, 1] > bytes.GetUpperBound(1)) continue;
+
+                        bytes[novaPosicao[0, 0], novaPosicao[0, 1]] = copia[posicao[0, 0], posicao[0, 1]];
+                        bytes[novaPosicao[0, 0], novaPosicao[0, 1] + 1] = copia[posicao[0, 0], posicao[0, 1] + 1];
+                        bytes[novaPosicao[0, 0], novaPosicao[0, 1] + 2] = copia[posicao[0, 0], posicao[0, 1] + 2];
+                    }
+                }
+            });
+        }
+
+        public void Espelhar(TipoEspelhamento tipo)
+        {
+            var matrizEspelhamento = new int[,] {
+                {1, 0, 0},
+                {0, 1, 0},
+                {0, 0, 1}
+            };
+
+            if (tipo == TipoEspelhamento.Horizontal)
+            {
+                matrizEspelhamento[1, 1] = -1;
+            }
+            else
+            {
+                matrizEspelhamento[0, 0] = -1;
+            }
+
+            AbrirBytesImagem(bytes =>
+            {
+                var copia = (byte[,])bytes.Clone();
+
+                for (int i = 0; i < copia.GetLength(0); i++)
+                {
+                    for (int j = 0; j < copia.GetLength(1); j += 3)
+                    {
+                        var posicao = new int[,] {
+                            {i, j, 1}
+                        };
+
+                        var novaPosicao = MultiplicarMatrizes(posicao, matrizEspelhamento);
+
+                        if (tipo == TipoEspelhamento.Horizontal)
+                        {
+                            novaPosicao[0, 1] += bytes.GetLength(1) - 3;
+                        }
+                        else
+                        {
+                            novaPosicao[0, 0] += bytes.GetLength(0) - 1;
+                        }
 
                         bytes[novaPosicao[0, 0], novaPosicao[0, 1]] = copia[posicao[0, 0], posicao[0, 1]];
                         bytes[novaPosicao[0, 0], novaPosicao[0, 1] + 1] = copia[posicao[0, 0], posicao[0, 1] + 1];

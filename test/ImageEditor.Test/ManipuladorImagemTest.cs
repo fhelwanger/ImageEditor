@@ -39,7 +39,6 @@ namespace ImageEditor.Test
             bmp.SetPixel(1, 1, Color.FromArgb(0xDD, 0x1D, 0xFF));
             
             var manipuladorImagem = new ManipuladorImagem();
-
             manipuladorImagem.CarregarImagem(bmp);
 
             // Act
@@ -68,7 +67,6 @@ namespace ImageEditor.Test
             bmp.SetPixel(2, 0, Color.FromArgb(0, 0, 0));
 
             var manipuladorImagem = new ManipuladorImagem();
-
             manipuladorImagem.CarregarImagem(bmp);
 
             // Act
@@ -91,7 +89,6 @@ namespace ImageEditor.Test
             bmp.SetPixel(2, 0, Color.FromArgb(0, 0, 0));
 
             var manipuladorImagem = new ManipuladorImagem();
-
             manipuladorImagem.CarregarImagem(bmp);
 
             // Act
@@ -114,7 +111,6 @@ namespace ImageEditor.Test
             bmp.SetPixel(0, 2, Color.FromArgb(0, 0, 0));
 
             var manipuladorImagem = new ManipuladorImagem();
-
             manipuladorImagem.CarregarImagem(bmp);
 
             // Act
@@ -137,7 +133,6 @@ namespace ImageEditor.Test
             bmp.SetPixel(0, 2, Color.FromArgb(0, 0, 0));
 
             var manipuladorImagem = new ManipuladorImagem();
-
             manipuladorImagem.CarregarImagem(bmp);
 
             // Act
@@ -147,6 +142,50 @@ namespace ImageEditor.Test
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(0, 0));
             Assert.Equal(Color.FromArgb(0, 0, 0), manipuladorImagem.Imagem.GetPixel(0, 1));
             Assert.Equal(Color.FromArgb(0xFF, 0xFF, 0xFF), manipuladorImagem.Imagem.GetPixel(0, 2));
+            Assert.Equal(bmp.Size, manipuladorImagem.Imagem.Size);
+        }
+
+        [Fact]
+        public void Espelhar_Horizontal_ImagemEspelhada()
+        {
+            // Arrange
+            var bmp = new Bitmap(3, 1);
+            bmp.SetPixel(0, 0, Color.FromArgb(1, 1, 1));
+            bmp.SetPixel(1, 0, Color.FromArgb(2, 2, 2));
+            bmp.SetPixel(2, 0, Color.FromArgb(3, 3, 3));
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bmp);
+
+            // Act
+            manipuladorImagem.Espelhar(ManipuladorImagem.TipoEspelhamento.Horizontal);
+
+            // Assert
+            Assert.Equal(Color.FromArgb(3, 3, 3), manipuladorImagem.Imagem.GetPixel(0, 0));
+            Assert.Equal(Color.FromArgb(2, 2, 2), manipuladorImagem.Imagem.GetPixel(1, 0));
+            Assert.Equal(Color.FromArgb(1, 1, 1), manipuladorImagem.Imagem.GetPixel(2, 0));
+            Assert.Equal(bmp.Size, manipuladorImagem.Imagem.Size);
+        }
+
+        [Fact]
+        public void Espelhar_Vertical_ImagemEspelhada()
+        {
+            // Arrange
+            var bmp = new Bitmap(1, 3);
+            bmp.SetPixel(0, 0, Color.FromArgb(1, 1, 1));
+            bmp.SetPixel(0, 1, Color.FromArgb(2, 2, 2));
+            bmp.SetPixel(0, 2, Color.FromArgb(3, 3, 3));
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bmp);
+
+            // Act
+            manipuladorImagem.Espelhar(ManipuladorImagem.TipoEspelhamento.Vertical);
+
+            // Assert
+            Assert.Equal(Color.FromArgb(3, 3, 3), manipuladorImagem.Imagem.GetPixel(0, 0));
+            Assert.Equal(Color.FromArgb(2, 2, 2), manipuladorImagem.Imagem.GetPixel(0, 1));
+            Assert.Equal(Color.FromArgb(1, 1, 1), manipuladorImagem.Imagem.GetPixel(0, 2));
             Assert.Equal(bmp.Size, manipuladorImagem.Imagem.Size);
         }
 

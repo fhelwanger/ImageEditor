@@ -254,6 +254,11 @@ namespace ImageEditor.Gui
 
         private void mnuTranslacao_Click(object sender, EventArgs e)
         {
+            if (!ConsistirImagemSelecionada())
+            {
+                return;
+            }
+
             using (var j = new frmTranslacao())
             {
                 if (j.ShowDialog() == DialogResult.OK)
@@ -261,6 +266,26 @@ namespace ImageEditor.Gui
                     var manipulador = new ManipuladorImagem();
                     manipulador.CarregarImagem(bitmap);
                     manipulador.Transladar(j.Horizontal, j.Vertical);
+
+                    picImagem.Image = manipulador.Imagem;
+                }
+            }
+        }
+
+        private void mnuEspelhamento_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemSelecionada())
+            {
+                return;
+            }
+
+            using (var j = new frmEspelhamento())
+            {
+                if (j.ShowDialog() == DialogResult.OK)
+                {
+                    var manipulador = new ManipuladorImagem();
+                    manipulador.CarregarImagem(bitmap);
+                    manipulador.Espelhar(j.TipoEspelhamento);
 
                     picImagem.Image = manipulador.Imagem;
                 }
