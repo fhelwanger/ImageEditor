@@ -74,6 +74,11 @@ namespace ImageEditor.Gui
 
         private void CarregarImagem(Bitmap bitmap)
         {
+            if (this.bitmap != null)
+            {
+                this.bitmap.Dispose();
+            }
+
             this.bitmap = bitmap;
             picImagem.Image = this.bitmap;
         }
@@ -266,6 +271,26 @@ namespace ImageEditor.Gui
                     var manipulador = new ManipuladorImagem();
                     manipulador.CarregarImagem(bitmap);
                     manipulador.Transladar(j.Horizontal, j.Vertical);
+
+                    picImagem.Image = manipulador.Imagem;
+                }
+            }
+        }
+
+        private void mnuRotacao_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemSelecionada())
+            {
+                return;
+            }
+
+            using (var j = new frmRotacao())
+            {
+                if (j.ShowDialog() == DialogResult.OK)
+                {
+                    var manipulador = new ManipuladorImagem();
+                    manipulador.CarregarImagem(bitmap);
+                    manipulador.Rotacionar(j.TipoRotacao);
 
                     picImagem.Image = manipulador.Imagem;
                 }

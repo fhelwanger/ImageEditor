@@ -146,6 +146,74 @@ namespace ImageEditor.Test
         }
 
         [Fact]
+        public void Rotacionar_90graus_ImagemRotacionada()
+        {
+            // Arrange
+            var bmp = new Bitmap(1, 3);
+            bmp.SetPixel(0, 0, Color.FromArgb(1, 1, 1));
+            bmp.SetPixel(0, 1, Color.FromArgb(2, 2, 2));
+            bmp.SetPixel(0, 2, Color.FromArgb(3, 3, 3));
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bmp);
+
+            // Act
+            manipuladorImagem.Rotacionar(ManipuladorImagem.TipoRotacao.R90);
+
+            // Assert
+            Assert.Equal(Color.FromArgb(1, 1, 1), manipuladorImagem.Imagem.GetPixel(0, 0));
+            Assert.Equal(Color.FromArgb(2, 2, 2), manipuladorImagem.Imagem.GetPixel(1, 0));
+            Assert.Equal(Color.FromArgb(3, 3, 3), manipuladorImagem.Imagem.GetPixel(2, 0));
+            Assert.Equal(bmp.Width, manipuladorImagem.Imagem.Height);
+            Assert.Equal(bmp.Height, manipuladorImagem.Imagem.Width);
+        }
+
+        [Fact]
+        public void Rotacionar_180graus_ImagemRotacionada()
+        {
+            // Arrange
+            var bmp = new Bitmap(1, 3);
+            bmp.SetPixel(0, 0, Color.FromArgb(1, 1, 1));
+            bmp.SetPixel(0, 1, Color.FromArgb(2, 2, 2));
+            bmp.SetPixel(0, 2, Color.FromArgb(3, 3, 3));
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bmp);
+
+            // Act
+            manipuladorImagem.Rotacionar(ManipuladorImagem.TipoRotacao.R180);
+
+            // Assert
+            Assert.Equal(Color.FromArgb(1, 1, 1), manipuladorImagem.Imagem.GetPixel(0, 2));
+            Assert.Equal(Color.FromArgb(2, 2, 2), manipuladorImagem.Imagem.GetPixel(0, 1));
+            Assert.Equal(Color.FromArgb(3, 3, 3), manipuladorImagem.Imagem.GetPixel(0, 0));
+            Assert.Equal(bmp.Size, manipuladorImagem.Imagem.Size);
+        }
+
+        [Fact]
+        public void Rotacionar_270graus_ImagemRotacionada()
+        {
+            // Arrange
+            var bmp = new Bitmap(1, 3);
+            bmp.SetPixel(0, 0, Color.FromArgb(1, 1, 1));
+            bmp.SetPixel(0, 1, Color.FromArgb(2, 2, 2));
+            bmp.SetPixel(0, 2, Color.FromArgb(3, 3, 3));
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bmp);
+
+            // Act
+            manipuladorImagem.Rotacionar(ManipuladorImagem.TipoRotacao.R270);
+
+            // Assert
+            Assert.Equal(Color.FromArgb(3, 3, 3), manipuladorImagem.Imagem.GetPixel(0, 0));
+            Assert.Equal(Color.FromArgb(2, 2, 2), manipuladorImagem.Imagem.GetPixel(1, 0));
+            Assert.Equal(Color.FromArgb(1, 1, 1), manipuladorImagem.Imagem.GetPixel(2, 0));
+            Assert.Equal(bmp.Width, manipuladorImagem.Imagem.Height);
+            Assert.Equal(bmp.Height, manipuladorImagem.Imagem.Width);
+        }
+
+        [Fact]
         public void Espelhar_Horizontal_ImagemEspelhada()
         {
             // Arrange

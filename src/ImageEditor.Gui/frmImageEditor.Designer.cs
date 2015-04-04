@@ -39,13 +39,14 @@
             this.mnuThreshold3 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuThreshold4 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuThreshold5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuTranslacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEspelhamento = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEstatisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
-            this.mnuEspelhamento = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuRotacao = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
@@ -91,6 +92,7 @@
             this.thresholdToolStripMenuItem,
             this.toolStripSeparator1,
             this.mnuTranslacao,
+            this.mnuRotacao,
             this.mnuEspelhamento});
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
@@ -143,12 +145,24 @@
             this.mnuThreshold5.Text = "Valores maiores que a mediana recebem 255 e menores que a média recebem 0";
             this.mnuThreshold5.Click += new System.EventHandler(this.mnuThreshold5_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
             // mnuTranslacao
             // 
             this.mnuTranslacao.Name = "mnuTranslacao";
             this.mnuTranslacao.Size = new System.Drawing.Size(152, 22);
             this.mnuTranslacao.Text = "Translação";
             this.mnuTranslacao.Click += new System.EventHandler(this.mnuTranslacao_Click);
+            // 
+            // mnuEspelhamento
+            // 
+            this.mnuEspelhamento.Name = "mnuEspelhamento";
+            this.mnuEspelhamento.Size = new System.Drawing.Size(152, 22);
+            this.mnuEspelhamento.Text = "Espelhamento";
+            this.mnuEspelhamento.Click += new System.EventHandler(this.mnuEspelhamento_Click);
             // 
             // visualizarToolStripMenuItem
             // 
@@ -185,17 +199,12 @@
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
             // 
-            // mnuEspelhamento
+            // mnuRotacao
             // 
-            this.mnuEspelhamento.Name = "mnuEspelhamento";
-            this.mnuEspelhamento.Size = new System.Drawing.Size(152, 22);
-            this.mnuEspelhamento.Text = "Espelhamento";
-            this.mnuEspelhamento.Click += new System.EventHandler(this.mnuEspelhamento_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.mnuRotacao.Name = "mnuRotacao";
+            this.mnuRotacao.Size = new System.Drawing.Size(152, 22);
+            this.mnuRotacao.Text = "Rotação";
+            this.mnuRotacao.Click += new System.EventHandler(this.mnuRotacao_Click);
             // 
             // frmImageEditor
             // 
@@ -236,6 +245,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuTranslacao;
         private System.Windows.Forms.ToolStripMenuItem mnuEspelhamento;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mnuRotacao;
 
     }
 }

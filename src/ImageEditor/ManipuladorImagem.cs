@@ -11,6 +11,13 @@ namespace ImageEditor
 {
     public class ManipuladorImagem
     {
+        public enum TipoRotacao
+        {
+            R90,
+            R180,
+            R270
+        }
+
         public enum TipoEspelhamento
         {
             Horizontal,
@@ -76,7 +83,7 @@ namespace ImageEditor
 
                 for (int i = 0; i < copia.GetLength(0); i++)
                 {
-                    for (int j = 0; j < copia.GetLength(1); j += 3)
+                    for (int j = 0; j < copia.GetLength(1); j += PIXEL_TAMANHO)
                     {
                         var posicao = new int[,] {
                             {i, j, 1}
@@ -93,6 +100,45 @@ namespace ImageEditor
                     }
                 }
             });
+        }
+
+        public void Rotacionar(TipoRotacao tipo)
+        {
+            var matrizRotacao = RetornarMatrizRotacao(tipo);
+            byte[,] novosBytes;
+
+            if (tipo == TipoRotacao.R180)
+            {
+                novosBytes = new byte[bitmap.Height, bitmap.Width * PIXEL_TAMANHO];
+            }
+            else
+            {
+                novosBytes = new byte[bitmap.Width, bitmap.Height * PIXEL_TAMANHO];
+            }
+            
+            AbrirBytesImagem(bytes =>
+            {
+                for (int i = 0; i < bytes.GetLength(0); i++)
+                {
+                    for (int j = 0; j < bytes.GetLength(1); j += PIXEL_TAMANHO)
+                    {
+                        var posicao = new int[,] {
+                            {i, j / PIXEL_TAMANHO, 1}
+                        };
+
+                        var novaPosicao = MultiplicarMatrizes(posicao, matrizRotacao);
+
+                        if (tipo != TipoRotacao.R270) novaPosicao[0, 0] += novosBytes.GetLength(0) - 1;
+                        if (tipo != TipoRotacao.R90) novaPosicao[0, 1] += novosBytes.GetLength(1) / PIXEL_TAMANHO - 1;
+
+                        novosBytes[novaPosicao[0, 0], novaPosicao[0, 1] * PIXEL_TAMANHO] = bytes[posicao[0, 0], posicao[0, 1] * PIXEL_TAMANHO];
+                        novosBytes[novaPosicao[0, 0], novaPosicao[0, 1] * PIXEL_TAMANHO + 1] = bytes[posicao[0, 0], posicao[0, 1] * PIXEL_TAMANHO + 1];
+                        novosBytes[novaPosicao[0, 0], novaPosicao[0, 1] * PIXEL_TAMANHO + 2] = bytes[posicao[0, 0], posicao[0, 1] * PIXEL_TAMANHO + 2];
+                    }
+                }
+            });
+
+            TrocarImagem(novosBytes);
         }
 
         public void Espelhar(TipoEspelhamento tipo)
@@ -118,7 +164,7 @@ namespace ImageEditor
 
                 for (int i = 0; i < copia.GetLength(0); i++)
                 {
-                    for (int j = 0; j < copia.GetLength(1); j += 3)
+                    for (int j = 0; j < copia.GetLength(1); j += PIXEL_TAMANHO)
                     {
                         var posicao = new int[,] {
                             {i, j, 1}
@@ -198,6 +244,23 @@ namespace ImageEditor
             }
         }
 
+        private void TrocarImagem(byte[,] novosBytes)
+        {
+            this.bitmap.Dispose();
+            this.bitmap = new Bitmap(novosBytes.GetLength(1) / 3, novosBytes.GetLength(0));
+
+            AbrirBytesImagem(bytes =>
+            {
+                for (int i = 0; i < bytes.GetLength(0); i++)
+                {
+                    for (int j = 0; j < bytes.GetLength(1); j++)
+                    {
+                        bytes[i, j] = novosBytes[i, j];
+                    }
+                }
+            });
+        }
+
         private int[,] MultiplicarMatrizes(int[,] matrizA, int[,] matrizB)
         {
             if (matrizA.GetLength(1) != matrizB.GetLength(0))
@@ -223,6 +286,36 @@ namespace ImageEditor
             }
 
             return resultado;
+        }
+
+        private int[,] RetornarMatrizRotacao(TipoRotacao tipo)
+        {
+            switch (tipo)
+            {
+                case TipoRotacao.R90:
+                    return new int[,] {
+                        {0, 1, 0},
+                        {-1, 0, 0},
+                        {0, 0, 1}
+                    };
+
+                case TipoRotacao.R180:
+                    return new int[,] {
+                        {-1, 0, 0},
+                        {0, -1, 0},
+                        {0, 0, 1}
+                    };
+
+                case TipoRotacao.R270:
+                    return new int[,] {
+                        {0, -1, 0},
+                        {1, 0, 0},
+                        {0, 0, 1}
+                    };
+
+                default:
+                    return null;
+            }
         }
     }
 }
