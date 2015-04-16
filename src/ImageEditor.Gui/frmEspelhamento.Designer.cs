@@ -42,7 +42,7 @@
             this.btnOk.Location = new System.Drawing.Point(110, 111);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 10;
+            this.btnOk.TabIndex = 2;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             // 
@@ -53,7 +53,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(191, 111);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -73,7 +73,7 @@
             this.radHorizontal.Location = new System.Drawing.Point(15, 51);
             this.radHorizontal.Name = "radHorizontal";
             this.radHorizontal.Size = new System.Drawing.Size(72, 17);
-            this.radHorizontal.TabIndex = 11;
+            this.radHorizontal.TabIndex = 0;
             this.radHorizontal.TabStop = true;
             this.radHorizontal.Text = "Horizontal";
             this.radHorizontal.UseVisualStyleBackColor = true;
@@ -84,7 +84,7 @@
             this.radVertical.Location = new System.Drawing.Point(15, 74);
             this.radVertical.Name = "radVertical";
             this.radVertical.Size = new System.Drawing.Size(60, 17);
-            this.radVertical.TabIndex = 12;
+            this.radVertical.TabIndex = 1;
             this.radVertical.TabStop = true;
             this.radVertical.Text = "Vertical";
             this.radVertical.UseVisualStyleBackColor = true;

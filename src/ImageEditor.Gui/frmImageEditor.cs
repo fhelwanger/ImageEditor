@@ -93,30 +93,6 @@ namespace ImageEditor.Gui
             picImagem.Image = this.bitmap;
         }
 
-        private void mnuHistograma_Click(object sender, EventArgs e)
-        {
-            if (!ConsistirImagemEscalaCinzaSelecionada())
-            {
-                return;
-            }
-
-            var j = new frmHistograma();
-            j.CarregarImagem(bitmap);
-            j.Show();
-        }
-
-        private void mnuEstatisticas_Click(object sender, EventArgs e)
-        {
-            if (!ConsistirImagemEscalaCinzaSelecionada())
-            {
-                return;
-            }
-
-            var j = new frmEstatisticas();
-            j.CarregarImagem(bitmap);
-            j.Show();
-        }
-
         private void mnuThreshold1_Click(object sender, EventArgs e)
         {
             // Valores maiores ou iguais a média recebem preto
@@ -287,6 +263,30 @@ namespace ImageEditor.Gui
             }
         }
 
+        private void mnuRedimensionar_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemSelecionada())
+            {
+                return;
+            }
+
+            using (var j = new frmRedimensionamento())
+            {
+                if (j.ShowDialog() == DialogResult.OK)
+                {
+                    var manipulador = new ManipuladorImagem();
+                    manipulador.CarregarImagem(bitmap);
+
+                    float horizontal = j.PercentualHorizontal / 100f;
+                    float vertical = j.PercentualVertical / 100f;
+
+                    manipulador.Redimensionar(horizontal, vertical);
+
+                    picImagem.Image = manipulador.Imagem;
+                }
+            }
+        }
+
         private void mnuRotacao_Click(object sender, EventArgs e)
         {
             if (!ConsistirImagemSelecionada())
@@ -325,6 +325,30 @@ namespace ImageEditor.Gui
                     picImagem.Image = manipulador.Imagem;
                 }
             }
+        }
+
+        private void mnuEstatisticas_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var j = new frmEstatisticas();
+            j.CarregarImagem(bitmap);
+            j.Show();
+        }
+
+        private void mnuHistograma_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var j = new frmHistograma();
+            j.CarregarImagem(bitmap);
+            j.Show();
         }
 
         private bool ConsistirImagemEscalaCinzaSelecionada()

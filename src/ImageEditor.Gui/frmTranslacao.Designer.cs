@@ -98,7 +98,7 @@
             -2147483648});
             this.nudVertical.Name = "nudVertical";
             this.nudVertical.Size = new System.Drawing.Size(97, 20);
-            this.nudVertical.TabIndex = 5;
+            this.nudVertical.TabIndex = 1;
             // 
             // btnCancelar
             // 
@@ -107,7 +107,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(255, 124);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -118,7 +118,7 @@
             this.btnOk.Location = new System.Drawing.Point(174, 124);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 7;
+            this.btnOk.TabIndex = 2;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             // 

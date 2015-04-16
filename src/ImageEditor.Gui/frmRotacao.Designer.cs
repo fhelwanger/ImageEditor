@@ -43,7 +43,7 @@
             this.btnOk.Location = new System.Drawing.Point(171, 125);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
-            this.btnOk.TabIndex = 12;
+            this.btnOk.TabIndex = 3;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             // 
@@ -54,7 +54,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(252, 125);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
@@ -64,7 +64,7 @@
             this.rad180.Location = new System.Drawing.Point(15, 74);
             this.rad180.Name = "rad180";
             this.rad180.Size = new System.Drawing.Size(47, 17);
-            this.rad180.TabIndex = 15;
+            this.rad180.TabIndex = 1;
             this.rad180.TabStop = true;
             this.rad180.Text = "180°";
             this.rad180.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@
             this.rad90.Location = new System.Drawing.Point(15, 51);
             this.rad90.Name = "rad90";
             this.rad90.Size = new System.Drawing.Size(41, 17);
-            this.rad90.TabIndex = 14;
+            this.rad90.TabIndex = 0;
             this.rad90.TabStop = true;
             this.rad90.Text = "90°";
             this.rad90.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@
             this.rad270.Location = new System.Drawing.Point(15, 97);
             this.rad270.Name = "rad270";
             this.rad270.Size = new System.Drawing.Size(47, 17);
-            this.rad270.TabIndex = 16;
+            this.rad270.TabIndex = 2;
             this.rad270.TabStop = true;
             this.rad270.Text = "270°";
             this.rad270.UseVisualStyleBackColor = true;

@@ -63,7 +63,7 @@ namespace ImageEditor
 
         public void Transladar(int horizontal, int vertical)
         {
-            var matrizTranslacao = new int[,] {
+            var matrizTranslacao = new float[,] {
                 {1, 0, 0},
                 {0, 1, 0},
                 {vertical, horizontal * 3, 1}
@@ -100,6 +100,45 @@ namespace ImageEditor
                     }
                 }
             });
+        }
+
+        public void Redimensionar(float horizontal, float vertical)
+        {
+            var matrizAmpliacao = new float[,] {
+                {vertical, 0, 0},
+                {0, horizontal, 0},
+                {0, 0, 1}
+            };
+
+            var novosBytes = new byte[(int)Math.Ceiling(bitmap.Height * vertical), (int)Math.Ceiling(bitmap.Width * horizontal) * PIXEL_TAMANHO];
+            var posicoesI = new List<int>();
+            var posicoesJ = new List<int>();
+            
+            AbrirBytesImagem(bytes =>
+            {
+                for (int i = 0; i < bytes.GetLength(0); i++)
+                {
+                    for (int j = 0; j < bytes.GetLength(1); j += PIXEL_TAMANHO)
+                    {
+                        var posicao = new int[,] {
+                            {i, j / PIXEL_TAMANHO, 1}
+                        };
+
+                        var novaPosicao = MultiplicarMatrizes(posicao, matrizAmpliacao);
+
+                        if (i == 0) posicoesJ.Add(novaPosicao[0, 1]);
+                        if (j == 0) posicoesI.Add(novaPosicao[0, 0]);
+
+                        novosBytes[novaPosicao[0, 0], novaPosicao[0, 1] * PIXEL_TAMANHO] = bytes[posicao[0, 0], posicao[0, 1] * PIXEL_TAMANHO];
+                        novosBytes[novaPosicao[0, 0], novaPosicao[0, 1] * PIXEL_TAMANHO + 1] = bytes[posicao[0, 0], posicao[0, 1] * PIXEL_TAMANHO + 1];
+                        novosBytes[novaPosicao[0, 0], novaPosicao[0, 1] * PIXEL_TAMANHO + 2] = bytes[posicao[0, 0], posicao[0, 1] * PIXEL_TAMANHO + 2];
+                    }
+                }
+            });
+
+            InterpolarImagem(novosBytes, posicoesI, posicoesJ);
+
+            TrocarImagem(novosBytes);
         }
 
         public void Rotacionar(TipoRotacao tipo)
@@ -143,7 +182,7 @@ namespace ImageEditor
 
         public void Espelhar(TipoEspelhamento tipo)
         {
-            var matrizEspelhamento = new int[,] {
+            var matrizEspelhamento = new float[,] {
                 {1, 0, 0},
                 {0, 1, 0},
                 {0, 0, 1}
@@ -261,7 +300,7 @@ namespace ImageEditor
             });
         }
 
-        private int[,] MultiplicarMatrizes(int[,] matrizA, int[,] matrizB)
+        private int[,] MultiplicarMatrizes(int[,] matrizA, float[,] matrizB)
         {
             if (matrizA.GetLength(1) != matrizB.GetLength(0))
             {
@@ -278,7 +317,7 @@ namespace ImageEditor
 
                     for (int k = 0; k < matrizB.GetLength(0); k++)
                     {
-                        soma += matrizA[i, k] * matrizB[k, j];
+                        soma += (int)(matrizA[i, k] * matrizB[k, j]);
                     }
 
                     resultado[i, j] = soma;
@@ -288,26 +327,137 @@ namespace ImageEditor
             return resultado;
         }
 
-        private int[,] RetornarMatrizRotacao(TipoRotacao tipo)
+        private void InterpolarImagem(byte[,] bytes, List<int> posicoesI, List<int> posicoesJ)
+        {
+            for (int i = 0; i < posicoesI.Count; i++)
+            {
+                for (int j = 0; j < posicoesJ.Count; j++)
+                {
+                    int posI = posicoesI[i];
+                    int posJ = posicoesJ[j] * PIXEL_TAMANHO;
+                    int posPI;
+                    int tam;
+
+                    if (i == posicoesI.Count - 1)
+                    {
+                        posPI = posicoesI[i];
+                        tam = bytes.GetLength(0) - posI + 1;
+                    }
+                    else
+                    {
+                        posPI = posicoesI[i + 1];
+                        tam = posPI - posI + 1;
+                    }
+
+                    var interR = Interpolar(tam, bytes[posI, posJ], bytes[posPI, posJ]);
+                    var interG = Interpolar(tam, bytes[posI, posJ + 1], bytes[posPI, posJ + 1]);
+                    var interB = Interpolar(tam, bytes[posI, posJ + 2], bytes[posPI, posJ + 2]);
+
+                    for (int k = 1; k < tam - 1; k++)
+                    {
+                        bytes[posI + k, posJ] = interR[k];
+                        bytes[posI + k, posJ + 1] = interG[k];
+                        bytes[posI + k, posJ + 2] = interB[k];
+                    }
+                }
+            }
+
+            for (int i = 0; i < bytes.GetLength(0); i++)
+            {
+                for (int j = 0; j < posicoesJ.Count; j++)
+                {
+                    int posJ = posicoesJ[j];
+                    int posPJ;
+                    int tam;
+
+                    if (j == posicoesJ.Count - 1)
+                    {
+                        posPJ = posicoesJ[j];
+                        tam = (bytes.GetLength(1) / PIXEL_TAMANHO) - posJ + 1;
+                    }
+                    else
+                    {
+                        posPJ = posicoesJ[j + 1];
+                        tam = posPJ - posJ + 1;
+                    }
+
+                    posJ *= PIXEL_TAMANHO;
+                    posPJ *= PIXEL_TAMANHO;
+
+                    var interR = Interpolar(tam, bytes[i, posJ], bytes[i, posPJ]);
+                    var interG = Interpolar(tam, bytes[i, posJ + 1], bytes[i, posPJ + 1]);
+                    var interB = Interpolar(tam, bytes[i, posJ + 2], bytes[i, posPJ + 2]);
+
+                    for (int k = 1; k < tam - 1; k++)
+                    {
+                        bytes[i, posJ + k * PIXEL_TAMANHO] = interR[k];
+                        bytes[i, posJ + k * PIXEL_TAMANHO + 1] = interG[k];
+                        bytes[i, posJ + k * PIXEL_TAMANHO + 2] = interB[k];
+                    }
+                }
+            }
+        }
+
+        private byte[] Interpolar(int tamanho, byte valor1, byte valor2)
+        {
+            var inter = new byte[tamanho];
+
+            inter[0] = valor1;
+            inter[tamanho - 1] = valor2;
+
+            InterpolarRecursivo(inter, 0, tamanho - 1);
+
+            return inter;
+        }
+
+        private void InterpolarRecursivo(byte[] vetor, int offset1, int offset2)
+        {
+            var media = (byte)((vetor[offset1] + vetor[offset2]) / 2);
+
+            var distancia = offset2 - offset1;
+
+            if (distancia < 2)
+            {
+                return;
+            }
+
+            var meio = offset1 + (distancia / 2);
+
+            if (distancia % 2 == 0)
+            {
+                vetor[meio] = media;
+                InterpolarRecursivo(vetor, offset1, meio);
+                InterpolarRecursivo(vetor, meio, offset2);
+            }
+            else
+            {
+                vetor[meio] = media;
+                vetor[meio + 1] = media;
+                InterpolarRecursivo(vetor, offset1, meio);
+                InterpolarRecursivo(vetor, meio + 1, offset2);
+            }
+        }
+
+        private float[,] RetornarMatrizRotacao(TipoRotacao tipo)
         {
             switch (tipo)
             {
                 case TipoRotacao.R90:
-                    return new int[,] {
+                    return new float[,] {
                         {0, 1, 0},
                         {-1, 0, 0},
                         {0, 0, 1}
                     };
 
                 case TipoRotacao.R180:
-                    return new int[,] {
+                    return new float[,] {
                         {-1, 0, 0},
                         {0, -1, 0},
                         {0, 0, 1}
                     };
 
                 case TipoRotacao.R270:
-                    return new int[,] {
+                    return new float[,] {
                         {0, -1, 0},
                         {1, 0, 0},
                         {0, 0, 1}

@@ -146,6 +146,40 @@ namespace ImageEditor.Test
         }
 
         [Fact]
+        public void Redimensionar_200pct_ImagemAumentada()
+        {
+            // Arrange
+            var bmp = new Bitmap(2, 3);
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bmp);
+
+            // Act
+            manipuladorImagem.Redimensionar(2, 2);
+
+            // Assert
+            Assert.Equal(4, manipuladorImagem.Imagem.Width);
+            Assert.Equal(6, manipuladorImagem.Imagem.Height);
+        }
+
+        [Fact]
+        public void Redimensionar_50pct_ImagemReduzida()
+        {
+            // Arrange
+            var bmp = new Bitmap(2, 2);
+
+            var manipuladorImagem = new ManipuladorImagem();
+            manipuladorImagem.CarregarImagem(bmp);
+
+            // Act
+            manipuladorImagem.Redimensionar(0.5f, 0.5f);
+
+            // Assert
+            Assert.Equal(1, manipuladorImagem.Imagem.Width);
+            Assert.Equal(1, manipuladorImagem.Imagem.Height);
+        }
+
+        [Fact]
         public void Rotacionar_90graus_ImagemRotacionada()
         {
             // Arrange

@@ -32,6 +32,9 @@
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbrirColorida = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbrirEscalaCinza = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFechar = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuSair = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thresholdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuThreshold1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,15 +44,13 @@
             this.mnuThreshold5 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuTranslacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRedimensionar = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRotacao = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEspelhamento = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEstatisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
-            this.mnuSair = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuFechar = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
@@ -92,12 +93,32 @@
             this.mnuAbrirEscalaCinza.Text = "Abrir escala de cinza";
             this.mnuAbrirEscalaCinza.Click += new System.EventHandler(this.mnuAbrirEscalaCinza_Click);
             // 
+            // mnuFechar
+            // 
+            this.mnuFechar.Name = "mnuFechar";
+            this.mnuFechar.Size = new System.Drawing.Size(181, 22);
+            this.mnuFechar.Text = "Fechar";
+            this.mnuFechar.Click += new System.EventHandler(this.mnuFechar_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            // 
+            // mnuSair
+            // 
+            this.mnuSair.Name = "mnuSair";
+            this.mnuSair.Size = new System.Drawing.Size(181, 22);
+            this.mnuSair.Text = "Sair";
+            this.mnuSair.Click += new System.EventHandler(this.mnuSair_Click);
+            // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.thresholdToolStripMenuItem,
             this.toolStripSeparator1,
             this.mnuTranslacao,
+            this.mnuRedimensionar,
             this.mnuRotacao,
             this.mnuEspelhamento});
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
@@ -113,7 +134,7 @@
             this.mnuThreshold4,
             this.mnuThreshold5});
             this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
-            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.thresholdToolStripMenuItem.Text = "Threshold";
             // 
             // mnuThreshold1
@@ -154,26 +175,33 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(150, 6);
             // 
             // mnuTranslacao
             // 
             this.mnuTranslacao.Name = "mnuTranslacao";
-            this.mnuTranslacao.Size = new System.Drawing.Size(149, 22);
+            this.mnuTranslacao.Size = new System.Drawing.Size(153, 22);
             this.mnuTranslacao.Text = "Translação";
             this.mnuTranslacao.Click += new System.EventHandler(this.mnuTranslacao_Click);
+            // 
+            // mnuRedimensionar
+            // 
+            this.mnuRedimensionar.Name = "mnuRedimensionar";
+            this.mnuRedimensionar.Size = new System.Drawing.Size(153, 22);
+            this.mnuRedimensionar.Text = "Redimensionar";
+            this.mnuRedimensionar.Click += new System.EventHandler(this.mnuRedimensionar_Click);
             // 
             // mnuRotacao
             // 
             this.mnuRotacao.Name = "mnuRotacao";
-            this.mnuRotacao.Size = new System.Drawing.Size(149, 22);
+            this.mnuRotacao.Size = new System.Drawing.Size(153, 22);
             this.mnuRotacao.Text = "Rotação";
             this.mnuRotacao.Click += new System.EventHandler(this.mnuRotacao_Click);
             // 
             // mnuEspelhamento
             // 
             this.mnuEspelhamento.Name = "mnuEspelhamento";
-            this.mnuEspelhamento.Size = new System.Drawing.Size(149, 22);
+            this.mnuEspelhamento.Size = new System.Drawing.Size(153, 22);
             this.mnuEspelhamento.Text = "Espelhamento";
             this.mnuEspelhamento.Click += new System.EventHandler(this.mnuEspelhamento_Click);
             // 
@@ -211,25 +239,6 @@
             this.picImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
-            // 
-            // mnuSair
-            // 
-            this.mnuSair.Name = "mnuSair";
-            this.mnuSair.Size = new System.Drawing.Size(181, 22);
-            this.mnuSair.Text = "Sair";
-            this.mnuSair.Click += new System.EventHandler(this.mnuSair_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
-            // 
-            // mnuFechar
-            // 
-            this.mnuFechar.Name = "mnuFechar";
-            this.mnuFechar.Size = new System.Drawing.Size(181, 22);
-            this.mnuFechar.Text = "Fechar";
-            this.mnuFechar.Click += new System.EventHandler(this.mnuFechar_Click);
             // 
             // frmImageEditor
             // 
@@ -274,6 +283,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuFechar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuSair;
+        private System.Windows.Forms.ToolStripMenuItem mnuRedimensionar;
 
     }
 }
