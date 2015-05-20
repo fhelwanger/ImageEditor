@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="EstatisticasImagem.cs" />
     <Compile Include="ManipuladorImagem.cs" />
+    <Compile Include="TransformacoesImagem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

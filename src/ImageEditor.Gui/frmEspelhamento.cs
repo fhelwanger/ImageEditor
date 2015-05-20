@@ -12,13 +12,13 @@ namespace ImageEditor.Gui
 {
     public partial class frmEspelhamento : Form
     {
-        public ManipuladorImagem.TipoEspelhamento TipoEspelhamento
+        public TransformacoesImagem.TipoEspelhamento TipoEspelhamento
         {
             get
             {
                 return (radHorizontal.Checked) ?
-                    ManipuladorImagem.TipoEspelhamento.Horizontal :
-                    ManipuladorImagem.TipoEspelhamento.Vertical;
+                    TransformacoesImagem.TipoEspelhamento.Horizontal :
+                    TransformacoesImagem.TipoEspelhamento.Vertical;
             }
         }
 

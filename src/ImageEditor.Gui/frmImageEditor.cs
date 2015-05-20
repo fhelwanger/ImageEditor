@@ -266,11 +266,11 @@ namespace ImageEditor.Gui
             {
                 if (j.ShowDialog() == DialogResult.OK)
                 {
-                    var manipulador = new ManipuladorImagem();
-                    manipulador.CarregarImagem(bitmap);
-                    manipulador.Transladar(j.Horizontal, j.Vertical);
+                    var transformacoes = new TransformacoesImagem();
+                    transformacoes.CarregarImagem(bitmap);
+                    transformacoes.Transladar(j.Horizontal, j.Vertical);
 
-                    TrocarImagem(manipulador.Imagem);
+                    TrocarImagem(transformacoes.Imagem);
                 }
             }
         }
@@ -286,15 +286,15 @@ namespace ImageEditor.Gui
             {
                 if (j.ShowDialog() == DialogResult.OK)
                 {
-                    var manipulador = new ManipuladorImagem();
-                    manipulador.CarregarImagem(bitmap);
+                    var transformacoes = new TransformacoesImagem();
+                    transformacoes.CarregarImagem(bitmap);
 
                     float horizontal = j.PercentualHorizontal / 100f;
                     float vertical = j.PercentualVertical / 100f;
 
-                    manipulador.Redimensionar(horizontal, vertical);
+                    transformacoes.Redimensionar(horizontal, vertical);
 
-                    TrocarImagem(manipulador.Imagem);
+                    TrocarImagem(transformacoes.Imagem);
                 }
             }
         }
@@ -310,11 +310,11 @@ namespace ImageEditor.Gui
             {
                 if (j.ShowDialog() == DialogResult.OK)
                 {
-                    var manipulador = new ManipuladorImagem();
-                    manipulador.CarregarImagem(bitmap);
-                    manipulador.Rotacionar(j.TipoRotacao);
+                    var transformacoes = new TransformacoesImagem();
+                    transformacoes.CarregarImagem(bitmap);
+                    transformacoes.Rotacionar(j.TipoRotacao);
 
-                    TrocarImagem(manipulador.Imagem);
+                    TrocarImagem(transformacoes.Imagem);
                 }
             }
         }
@@ -330,11 +330,11 @@ namespace ImageEditor.Gui
             {
                 if (j.ShowDialog() == DialogResult.OK)
                 {
-                    var manipulador = new ManipuladorImagem();
-                    manipulador.CarregarImagem(bitmap);
-                    manipulador.Espelhar(j.TipoEspelhamento);
+                    var transformacoes = new TransformacoesImagem();
+                    transformacoes.CarregarImagem(bitmap);
+                    transformacoes.Espelhar(j.TipoEspelhamento);
 
-                    TrocarImagem(manipulador.Imagem);
+                    TrocarImagem(transformacoes.Imagem);
                 }
             }
         }

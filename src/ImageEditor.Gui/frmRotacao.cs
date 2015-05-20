@@ -12,21 +12,21 @@ namespace ImageEditor.Gui
 {
     public partial class frmRotacao : Form
     {
-        public ManipuladorImagem.TipoRotacao TipoRotacao
+        public TransformacoesImagem.TipoRotacao TipoRotacao
         {
             get
             {
                 if (rad90.Checked)
                 {
-                    return ManipuladorImagem.TipoRotacao.R90;
+                    return TransformacoesImagem.TipoRotacao.R90;
                 }
                 else if (rad180.Checked)
                 {
-                    return ManipuladorImagem.TipoRotacao.R180;
+                    return TransformacoesImagem.TipoRotacao.R180;
                 }
                 else
                 {
-                    return ManipuladorImagem.TipoRotacao.R270;
+                    return TransformacoesImagem.TipoRotacao.R270;
                 }
             }
         }
