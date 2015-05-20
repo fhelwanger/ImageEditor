@@ -93,6 +93,18 @@ namespace ImageEditor.Gui
             picImagem.Image = this.bitmap;
         }
 
+        private void TrocarImagem(Bitmap bitmap)
+        {
+            if (mnuAplicarOriginal.Checked)
+            {
+                picImagem.Image = bitmap;
+            }
+            else
+            {
+                CarregarImagem(bitmap);
+            }
+        }
+
         private void mnuThreshold1_Click(object sender, EventArgs e)
         {
             // Valores maiores ou iguais a média recebem preto
@@ -240,7 +252,7 @@ namespace ImageEditor.Gui
 
             transformacao(manipuladorImagem, estatisticasImagem);
 
-            picImagem.Image = manipuladorImagem.Imagem;
+            TrocarImagem(manipuladorImagem.Imagem);
         }
 
         private void mnuTranslacao_Click(object sender, EventArgs e)
@@ -258,7 +270,7 @@ namespace ImageEditor.Gui
                     manipulador.CarregarImagem(bitmap);
                     manipulador.Transladar(j.Horizontal, j.Vertical);
 
-                    picImagem.Image = manipulador.Imagem;
+                    TrocarImagem(manipulador.Imagem);
                 }
             }
         }
@@ -282,7 +294,7 @@ namespace ImageEditor.Gui
 
                     manipulador.Redimensionar(horizontal, vertical);
 
-                    picImagem.Image = manipulador.Imagem;
+                    TrocarImagem(manipulador.Imagem);
                 }
             }
         }
@@ -302,7 +314,7 @@ namespace ImageEditor.Gui
                     manipulador.CarregarImagem(bitmap);
                     manipulador.Rotacionar(j.TipoRotacao);
 
-                    picImagem.Image = manipulador.Imagem;
+                    TrocarImagem(manipulador.Imagem);
                 }
             }
         }
@@ -322,7 +334,7 @@ namespace ImageEditor.Gui
                     manipulador.CarregarImagem(bitmap);
                     manipulador.Espelhar(j.TipoEspelhamento);
 
-                    picImagem.Image = manipulador.Imagem;
+                    TrocarImagem(manipulador.Imagem);
                 }
             }
         }

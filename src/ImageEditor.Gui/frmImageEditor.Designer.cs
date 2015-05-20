@@ -51,6 +51,8 @@
             this.mnuEstatisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuAplicarOriginal = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
@@ -120,7 +122,9 @@
             this.mnuTranslacao,
             this.mnuRedimensionar,
             this.mnuRotacao,
-            this.mnuEspelhamento});
+            this.mnuEspelhamento,
+            this.toolStripSeparator3,
+            this.mnuAplicarOriginal});
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.editarToolStripMenuItem.Text = "Editar";
@@ -134,7 +138,7 @@
             this.mnuThreshold4,
             this.mnuThreshold5});
             this.thresholdToolStripMenuItem.Name = "thresholdToolStripMenuItem";
-            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.thresholdToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.thresholdToolStripMenuItem.Text = "Threshold";
             // 
             // mnuThreshold1
@@ -175,33 +179,33 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(150, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(270, 6);
             // 
             // mnuTranslacao
             // 
             this.mnuTranslacao.Name = "mnuTranslacao";
-            this.mnuTranslacao.Size = new System.Drawing.Size(153, 22);
+            this.mnuTranslacao.Size = new System.Drawing.Size(273, 22);
             this.mnuTranslacao.Text = "Translação";
             this.mnuTranslacao.Click += new System.EventHandler(this.mnuTranslacao_Click);
             // 
             // mnuRedimensionar
             // 
             this.mnuRedimensionar.Name = "mnuRedimensionar";
-            this.mnuRedimensionar.Size = new System.Drawing.Size(153, 22);
+            this.mnuRedimensionar.Size = new System.Drawing.Size(273, 22);
             this.mnuRedimensionar.Text = "Redimensionar";
             this.mnuRedimensionar.Click += new System.EventHandler(this.mnuRedimensionar_Click);
             // 
             // mnuRotacao
             // 
             this.mnuRotacao.Name = "mnuRotacao";
-            this.mnuRotacao.Size = new System.Drawing.Size(153, 22);
+            this.mnuRotacao.Size = new System.Drawing.Size(273, 22);
             this.mnuRotacao.Text = "Rotação";
             this.mnuRotacao.Click += new System.EventHandler(this.mnuRotacao_Click);
             // 
             // mnuEspelhamento
             // 
             this.mnuEspelhamento.Name = "mnuEspelhamento";
-            this.mnuEspelhamento.Size = new System.Drawing.Size(153, 22);
+            this.mnuEspelhamento.Size = new System.Drawing.Size(273, 22);
             this.mnuEspelhamento.Text = "Espelhamento";
             this.mnuEspelhamento.Click += new System.EventHandler(this.mnuEspelhamento_Click);
             // 
@@ -217,14 +221,14 @@
             // mnuEstatisticas
             // 
             this.mnuEstatisticas.Name = "mnuEstatisticas";
-            this.mnuEstatisticas.Size = new System.Drawing.Size(136, 22);
+            this.mnuEstatisticas.Size = new System.Drawing.Size(152, 22);
             this.mnuEstatisticas.Text = "Estatísticas";
             this.mnuEstatisticas.Click += new System.EventHandler(this.mnuEstatisticas_Click);
             // 
             // mnuHistograma
             // 
             this.mnuHistograma.Name = "mnuHistograma";
-            this.mnuHistograma.Size = new System.Drawing.Size(136, 22);
+            this.mnuHistograma.Size = new System.Drawing.Size(152, 22);
             this.mnuHistograma.Text = "Histograma";
             this.mnuHistograma.Click += new System.EventHandler(this.mnuHistograma_Click);
             // 
@@ -239,6 +243,20 @@
             this.picImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(270, 6);
+            // 
+            // mnuAplicarOriginal
+            // 
+            this.mnuAplicarOriginal.Checked = true;
+            this.mnuAplicarOriginal.CheckOnClick = true;
+            this.mnuAplicarOriginal.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuAplicarOriginal.Name = "mnuAplicarOriginal";
+            this.mnuAplicarOriginal.Size = new System.Drawing.Size(273, 22);
+            this.mnuAplicarOriginal.Text = "Aplicar alterações na imagem original";
             // 
             // frmImageEditor
             // 
@@ -284,6 +302,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuSair;
         private System.Windows.Forms.ToolStripMenuItem mnuRedimensionar;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mnuAplicarOriginal;
 
     }
 }
