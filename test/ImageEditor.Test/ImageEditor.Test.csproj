@@ -52,10 +52,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EstatisticasImagemTest.cs" />
-    <Compile Include="ManipuladorImagemTest.cs" />
+    <Compile Include="Testes\EstatisticasImagemTest.cs" />
+    <Compile Include="Testes\ManipuladorImagemTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransformacoesImagemTest.cs" />
+    <Compile Include="Testes\TransformacoesImagemTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

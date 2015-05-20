@@ -45,69 +45,69 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmRedimensionamento.cs">
+    <Compile Include="Forms\frmRedimensionamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRedimensionamento.Designer.cs">
+    <Compile Include="Forms\frmRedimensionamento.Designer.cs">
       <DependentUpon>frmRedimensionamento.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEspelhamento.cs">
+    <Compile Include="Forms\frmEspelhamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEspelhamento.Designer.cs">
+    <Compile Include="Forms\frmEspelhamento.Designer.cs">
       <DependentUpon>frmEspelhamento.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEstatisticas.cs">
+    <Compile Include="Forms\frmEstatisticas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmEstatisticas.Designer.cs">
+    <Compile Include="Forms\frmEstatisticas.Designer.cs">
       <DependentUpon>frmEstatisticas.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmHistograma.cs">
+    <Compile Include="Forms\frmHistograma.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHistograma.Designer.cs">
+    <Compile Include="Forms\frmHistograma.Designer.cs">
       <DependentUpon>frmHistograma.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmImageEditor.cs">
+    <Compile Include="Forms\frmImageEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmImageEditor.Designer.cs">
+    <Compile Include="Forms\frmImageEditor.Designer.cs">
       <DependentUpon>frmImageEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmRotacao.cs">
+    <Compile Include="Forms\frmRotacao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmRotacao.Designer.cs">
+    <Compile Include="Forms\frmRotacao.Designer.cs">
       <DependentUpon>frmRotacao.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTranslacao.cs">
+    <Compile Include="Forms\frmTranslacao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTranslacao.Designer.cs">
+    <Compile Include="Forms\frmTranslacao.Designer.cs">
       <DependentUpon>frmTranslacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmRedimensionamento.resx">
+    <EmbeddedResource Include="Forms\frmRedimensionamento.resx">
       <DependentUpon>frmRedimensionamento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEspelhamento.resx">
+    <EmbeddedResource Include="Forms\frmEspelhamento.resx">
       <DependentUpon>frmEspelhamento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmEstatisticas.resx">
+    <EmbeddedResource Include="Forms\frmEstatisticas.resx">
       <DependentUpon>frmEstatisticas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHistograma.resx">
+    <EmbeddedResource Include="Forms\frmHistograma.resx">
       <DependentUpon>frmHistograma.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmImageEditor.resx">
+    <EmbeddedResource Include="Forms\frmImageEditor.resx">
       <DependentUpon>frmImageEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmRotacao.resx">
+    <EmbeddedResource Include="Forms\frmRotacao.resx">
       <DependentUpon>frmRotacao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTranslacao.resx">
+    <EmbeddedResource Include="Forms\frmTranslacao.resx">
       <DependentUpon>frmTranslacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
