@@ -47,12 +47,16 @@
             this.mnuRedimensionar = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRotacao = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEspelhamento = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.filtrosPassaBaixaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFiltroMedia = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFiltroGauss = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuAplicarOriginal = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEstatisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuAplicarOriginal = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
@@ -123,6 +127,8 @@
             this.mnuRedimensionar,
             this.mnuRotacao,
             this.mnuEspelhamento,
+            this.toolStripSeparator4,
+            this.filtrosPassaBaixaToolStripMenuItem,
             this.toolStripSeparator3,
             this.mnuAplicarOriginal});
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
@@ -209,6 +215,46 @@
             this.mnuEspelhamento.Text = "Espelhamento";
             this.mnuEspelhamento.Click += new System.EventHandler(this.mnuEspelhamento_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(270, 6);
+            // 
+            // filtrosPassaBaixaToolStripMenuItem
+            // 
+            this.filtrosPassaBaixaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuFiltroMedia,
+            this.mnuFiltroGauss});
+            this.filtrosPassaBaixaToolStripMenuItem.Name = "filtrosPassaBaixaToolStripMenuItem";
+            this.filtrosPassaBaixaToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.filtrosPassaBaixaToolStripMenuItem.Text = "Filtros Passa Baixa";
+            // 
+            // mnuFiltroMedia
+            // 
+            this.mnuFiltroMedia.Name = "mnuFiltroMedia";
+            this.mnuFiltroMedia.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroMedia.Text = "Média";
+            this.mnuFiltroMedia.Click += new System.EventHandler(this.mnuFiltroMedia_Click);
+            // 
+            // mnuFiltroGauss
+            // 
+            this.mnuFiltroGauss.Name = "mnuFiltroGauss";
+            this.mnuFiltroGauss.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroGauss.Text = "Gauss";
+            this.mnuFiltroGauss.Click += new System.EventHandler(this.mnuFiltroGauss_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(270, 6);
+            // 
+            // mnuAplicarOriginal
+            // 
+            this.mnuAplicarOriginal.CheckOnClick = true;
+            this.mnuAplicarOriginal.Name = "mnuAplicarOriginal";
+            this.mnuAplicarOriginal.Size = new System.Drawing.Size(273, 22);
+            this.mnuAplicarOriginal.Text = "Aplicar alterações na imagem original";
+            // 
             // visualizarToolStripMenuItem
             // 
             this.visualizarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -221,14 +267,14 @@
             // mnuEstatisticas
             // 
             this.mnuEstatisticas.Name = "mnuEstatisticas";
-            this.mnuEstatisticas.Size = new System.Drawing.Size(152, 22);
+            this.mnuEstatisticas.Size = new System.Drawing.Size(136, 22);
             this.mnuEstatisticas.Text = "Estatísticas";
             this.mnuEstatisticas.Click += new System.EventHandler(this.mnuEstatisticas_Click);
             // 
             // mnuHistograma
             // 
             this.mnuHistograma.Name = "mnuHistograma";
-            this.mnuHistograma.Size = new System.Drawing.Size(152, 22);
+            this.mnuHistograma.Size = new System.Drawing.Size(136, 22);
             this.mnuHistograma.Text = "Histograma";
             this.mnuHistograma.Click += new System.EventHandler(this.mnuHistograma_Click);
             // 
@@ -243,20 +289,6 @@
             this.picImagem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(270, 6);
-            // 
-            // mnuAplicarOriginal
-            // 
-            this.mnuAplicarOriginal.Checked = true;
-            this.mnuAplicarOriginal.CheckOnClick = true;
-            this.mnuAplicarOriginal.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnuAplicarOriginal.Name = "mnuAplicarOriginal";
-            this.mnuAplicarOriginal.Size = new System.Drawing.Size(273, 22);
-            this.mnuAplicarOriginal.Text = "Aplicar alterações na imagem original";
             // 
             // frmImageEditor
             // 
@@ -304,6 +336,10 @@
         private System.Windows.Forms.ToolStripMenuItem mnuRedimensionar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnuAplicarOriginal;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem filtrosPassaBaixaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuFiltroMedia;
+        private System.Windows.Forms.ToolStripMenuItem mnuFiltroGauss;
 
     }
 }

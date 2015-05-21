@@ -339,6 +339,34 @@ namespace ImageEditor.Gui
             }
         }
 
+        private void mnuFiltroMedia_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var filtros = new FiltrosPassaBaixa();
+            filtros.CarregarImagem(bitmap);
+            filtros.Media();
+
+            TrocarImagem(filtros.Imagem);
+        }
+
+        private void mnuFiltroGauss_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var filtros = new FiltrosPassaBaixa();
+            filtros.CarregarImagem(bitmap);
+            filtros.Gauss();
+
+            TrocarImagem(filtros.Imagem);
+        }
+
         private void mnuEstatisticas_Click(object sender, EventArgs e)
         {
             if (!ConsistirImagemEscalaCinzaSelecionada())
