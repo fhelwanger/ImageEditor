@@ -52,15 +52,16 @@
             this.mnuFiltroMedia = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFiltroGauss = new System.Windows.Forms.ToolStripMenuItem();
             this.filtrosPassaAltaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFiltroRoberts = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFiltroSobel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFiltroMarrHildreth = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuAplicarOriginal = new System.Windows.Forms.ToolStripMenuItem();
             this.visualizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEstatisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
-            this.mnuFiltroRoberts = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFiltroMarrHildreth = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFiltroMediana = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
@@ -229,6 +230,7 @@
             // 
             this.filtrosPassaBaixaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFiltroMedia,
+            this.mnuFiltroMediana,
             this.mnuFiltroGauss});
             this.filtrosPassaBaixaToolStripMenuItem.Name = "filtrosPassaBaixaToolStripMenuItem";
             this.filtrosPassaBaixaToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
@@ -237,14 +239,14 @@
             // mnuFiltroMedia
             // 
             this.mnuFiltroMedia.Name = "mnuFiltroMedia";
-            this.mnuFiltroMedia.Size = new System.Drawing.Size(107, 22);
+            this.mnuFiltroMedia.Size = new System.Drawing.Size(152, 22);
             this.mnuFiltroMedia.Text = "Média";
             this.mnuFiltroMedia.Click += new System.EventHandler(this.mnuFiltroMedia_Click);
             // 
             // mnuFiltroGauss
             // 
             this.mnuFiltroGauss.Name = "mnuFiltroGauss";
-            this.mnuFiltroGauss.Size = new System.Drawing.Size(107, 22);
+            this.mnuFiltroGauss.Size = new System.Drawing.Size(152, 22);
             this.mnuFiltroGauss.Text = "Gauss";
             this.mnuFiltroGauss.Click += new System.EventHandler(this.mnuFiltroGauss_Click);
             // 
@@ -258,12 +260,26 @@
             this.filtrosPassaAltaToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.filtrosPassaAltaToolStripMenuItem.Text = "Filtros Passa Alta";
             // 
+            // mnuFiltroRoberts
+            // 
+            this.mnuFiltroRoberts.Name = "mnuFiltroRoberts";
+            this.mnuFiltroRoberts.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroRoberts.Text = "Roberts";
+            this.mnuFiltroRoberts.Click += new System.EventHandler(this.mnuFiltroRoberts_Click);
+            // 
             // mnuFiltroSobel
             // 
             this.mnuFiltroSobel.Name = "mnuFiltroSobel";
             this.mnuFiltroSobel.Size = new System.Drawing.Size(152, 22);
             this.mnuFiltroSobel.Text = "Sobel";
             this.mnuFiltroSobel.Click += new System.EventHandler(this.mnuFiltroSobel_Click);
+            // 
+            // mnuFiltroMarrHildreth
+            // 
+            this.mnuFiltroMarrHildreth.Name = "mnuFiltroMarrHildreth";
+            this.mnuFiltroMarrHildreth.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroMarrHildreth.Text = "Marr-Hildreth";
+            this.mnuFiltroMarrHildreth.Click += new System.EventHandler(this.mnuFiltroMarrHildreth_Click);
             // 
             // toolStripSeparator3
             // 
@@ -312,19 +328,12 @@
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
             // 
-            // mnuFiltroRoberts
+            // mnuFiltroMediana
             // 
-            this.mnuFiltroRoberts.Name = "mnuFiltroRoberts";
-            this.mnuFiltroRoberts.Size = new System.Drawing.Size(152, 22);
-            this.mnuFiltroRoberts.Text = "Roberts";
-            this.mnuFiltroRoberts.Click += new System.EventHandler(this.mnuFiltroRoberts_Click);
-            // 
-            // mnuFiltroMarrHildreth
-            // 
-            this.mnuFiltroMarrHildreth.Name = "mnuFiltroMarrHildreth";
-            this.mnuFiltroMarrHildreth.Size = new System.Drawing.Size(152, 22);
-            this.mnuFiltroMarrHildreth.Text = "Marr-Hildreth";
-            this.mnuFiltroMarrHildreth.Click += new System.EventHandler(this.mnuFiltroMarrHildreth_Click);
+            this.mnuFiltroMediana.Name = "mnuFiltroMediana";
+            this.mnuFiltroMediana.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroMediana.Text = "Mediana";
+            this.mnuFiltroMediana.Click += new System.EventHandler(this.mnuFiltroMediana_Click);
             // 
             // frmImageEditor
             // 
@@ -380,6 +389,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuFiltroSobel;
         private System.Windows.Forms.ToolStripMenuItem mnuFiltroRoberts;
         private System.Windows.Forms.ToolStripMenuItem mnuFiltroMarrHildreth;
+        private System.Windows.Forms.ToolStripMenuItem mnuFiltroMediana;
 
     }
 }

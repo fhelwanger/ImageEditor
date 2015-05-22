@@ -35,6 +35,42 @@ namespace ImageEditor
             Convolucao(matrizMedia, 9);
         }
 
+        public void Mediana()
+        {
+            byte[,] novosBytes = null;
+
+            manipuladorImagem.AbrirBytesImagem(bytes =>
+            {
+                novosBytes = new byte[bytes.GetLength(0), bytes.GetLength(1)];
+
+                for (int y = 1; y < bytes.GetLength(0) - 1; y++)
+                {
+                    for (int x = ManipuladorImagem.PIXEL_TAMANHO; x < bytes.GetLength(1) - ManipuladorImagem.PIXEL_TAMANHO; x += ManipuladorImagem.PIXEL_TAMANHO)
+                    {
+                        var pixels = new List<byte>();
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            for (int j = 0; j < 3; j++)
+                            {
+                                pixels.Add(bytes[y + (i - 1), x + (j - 1) * ManipuladorImagem.PIXEL_TAMANHO]);
+                            }
+                        }
+
+                        pixels.Sort();
+
+                        var novoValor = pixels[pixels.Count / 2];
+
+                        novosBytes[y, x] = novoValor;
+                        novosBytes[y, x + 1] = novoValor;
+                        novosBytes[y, x + 2] = novoValor;
+                    }
+                }
+            });
+
+            manipuladorImagem.TrocarImagem(novosBytes);
+        }
+
         public void Gauss()
         {
             var matrizGauss = new byte[,] {

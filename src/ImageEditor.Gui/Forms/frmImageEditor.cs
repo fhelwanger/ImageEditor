@@ -353,6 +353,20 @@ namespace ImageEditor.Gui
             TrocarImagem(filtros.Imagem);
         }
 
+        private void mnuFiltroMediana_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var filtros = new FiltrosPassaBaixa();
+            filtros.CarregarImagem(bitmap);
+            filtros.Mediana();
+
+            TrocarImagem(filtros.Imagem);
+        }
+
         private void mnuFiltroGauss_Click(object sender, EventArgs e)
         {
             if (!ConsistirImagemEscalaCinzaSelecionada())
