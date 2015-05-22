@@ -367,6 +367,48 @@ namespace ImageEditor.Gui
             TrocarImagem(filtros.Imagem);
         }
 
+        private void mnuFiltroRoberts_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var filtros = new FiltrosPassaAlta();
+            filtros.CarregarImagem(bitmap);
+            filtros.Roberts();
+
+            TrocarImagem(filtros.Imagem);
+        }
+
+        private void mnuFiltroSobel_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var filtros = new FiltrosPassaAlta();
+            filtros.CarregarImagem(bitmap);
+            filtros.Sobel();
+
+            TrocarImagem(filtros.Imagem);
+        }
+
+        private void mnuFiltroMarrHildreth_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var filtros = new FiltrosPassaAlta();
+            filtros.CarregarImagem(bitmap);
+            filtros.MarrHildreth();
+
+            TrocarImagem(filtros.Imagem);
+        }
+
         private void mnuEstatisticas_Click(object sender, EventArgs e)
         {
             if (!ConsistirImagemEscalaCinzaSelecionada())

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\EstatisticasImagem.cs" />
+    <Compile Include="Classes\FiltrosPassaAlta.cs" />
     <Compile Include="Classes\FiltrosPassaBaixa.cs" />
     <Compile Include="Classes\ManipuladorImagem.cs" />
     <Compile Include="Classes\TransformacoesImagem.cs" />
