@@ -43,6 +43,8 @@ namespace ImageEditor
             {
                 novosBytes = new byte[bytes.GetLength(0), bytes.GetLength(1)];
 
+                manipuladorImagem.CopiarBorda(bytes, novosBytes);
+
                 for (int y = 1; y < bytes.GetLength(0) - 1; y++)
                 {
                     for (int x = ManipuladorImagem.PIXEL_TAMANHO; x < bytes.GetLength(1) - ManipuladorImagem.PIXEL_TAMANHO; x += ManipuladorImagem.PIXEL_TAMANHO)
@@ -89,6 +91,8 @@ namespace ImageEditor
             manipuladorImagem.AbrirBytesImagem(bytes =>
             {
                 novosBytes = new byte[bytes.GetLength(0), bytes.GetLength(1)];
+
+                manipuladorImagem.CopiarBorda(bytes, novosBytes);
 
                 for (int y = 1; y < bytes.GetLength(0) - 1; y++)
                 {

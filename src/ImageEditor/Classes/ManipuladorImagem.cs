@@ -65,6 +65,30 @@ namespace ImageEditor
             });
         }
 
+        public void CopiarBorda(byte[,] origem, byte[,] destino)
+        {
+            for (int x = 0; x < origem.GetLength(1); x++)
+            {
+                int ultimaLinha = origem.GetLength(0) - 1;
+
+                destino[0, x] = origem[0, x];
+                destino[ultimaLinha, x] = origem[ultimaLinha, x];
+            }
+
+            for (int y = 0; y < origem.GetLength(0); y++)
+            {
+                int ultimaColuna = origem.GetLength(1) - 1;
+
+                destino[y, 0] = origem[y, 0];
+                destino[y, 1] = origem[y, 1];
+                destino[y, 2] = origem[y, 2];
+
+                destino[y, ultimaColuna - 2] = origem[y, ultimaColuna - 2];
+                destino[y, ultimaColuna - 1] = origem[y, ultimaColuna - 1];
+                destino[y, ultimaColuna] = origem[y, ultimaColuna];
+            }
+        }
+
         public void AbrirBytesImagem(Action<byte[,]> acao)
         {
             //Explicação do LockBits: http://bobpowell.net/lockingbits.aspx
