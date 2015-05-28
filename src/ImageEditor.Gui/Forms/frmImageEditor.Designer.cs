@@ -55,6 +55,8 @@
             this.filtrosPassaAltaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFiltroRoberts = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFiltroSobel = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFiltroKirsch = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFiltroRobinson = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFiltroMarrHildreth = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuAplicarOriginal = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,8 +64,12 @@
             this.mnuEstatisticas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHistograma = new System.Windows.Forms.ToolStripMenuItem();
             this.picImagem = new System.Windows.Forms.PictureBox();
-            this.mnuFiltroKirsch = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFiltroRobinson = new System.Windows.Forms.ToolStripMenuItem();
+            this.morfologiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDilatacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuErosao = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAbertura = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuFechamento = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImagem)).BeginInit();
             this.SuspendLayout();
@@ -138,6 +144,8 @@
             this.filtrosPassaBaixaToolStripMenuItem,
             this.filtrosPassaAltaToolStripMenuItem,
             this.toolStripSeparator3,
+            this.morfologiaToolStripMenuItem,
+            this.toolStripSeparator5,
             this.mnuAplicarOriginal});
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
@@ -241,21 +249,21 @@
             // mnuFiltroMedia
             // 
             this.mnuFiltroMedia.Name = "mnuFiltroMedia";
-            this.mnuFiltroMedia.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroMedia.Size = new System.Drawing.Size(120, 22);
             this.mnuFiltroMedia.Text = "Média";
             this.mnuFiltroMedia.Click += new System.EventHandler(this.mnuFiltroMedia_Click);
             // 
             // mnuFiltroMediana
             // 
             this.mnuFiltroMediana.Name = "mnuFiltroMediana";
-            this.mnuFiltroMediana.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroMediana.Size = new System.Drawing.Size(120, 22);
             this.mnuFiltroMediana.Text = "Mediana";
             this.mnuFiltroMediana.Click += new System.EventHandler(this.mnuFiltroMediana_Click);
             // 
             // mnuFiltroGauss
             // 
             this.mnuFiltroGauss.Name = "mnuFiltroGauss";
-            this.mnuFiltroGauss.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroGauss.Size = new System.Drawing.Size(120, 22);
             this.mnuFiltroGauss.Text = "Gauss";
             this.mnuFiltroGauss.Click += new System.EventHandler(this.mnuFiltroGauss_Click);
             // 
@@ -274,21 +282,35 @@
             // mnuFiltroRoberts
             // 
             this.mnuFiltroRoberts.Name = "mnuFiltroRoberts";
-            this.mnuFiltroRoberts.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroRoberts.Size = new System.Drawing.Size(147, 22);
             this.mnuFiltroRoberts.Text = "Roberts";
             this.mnuFiltroRoberts.Click += new System.EventHandler(this.mnuFiltroRoberts_Click);
             // 
             // mnuFiltroSobel
             // 
             this.mnuFiltroSobel.Name = "mnuFiltroSobel";
-            this.mnuFiltroSobel.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroSobel.Size = new System.Drawing.Size(147, 22);
             this.mnuFiltroSobel.Text = "Sobel";
             this.mnuFiltroSobel.Click += new System.EventHandler(this.mnuFiltroSobel_Click);
+            // 
+            // mnuFiltroKirsch
+            // 
+            this.mnuFiltroKirsch.Name = "mnuFiltroKirsch";
+            this.mnuFiltroKirsch.Size = new System.Drawing.Size(147, 22);
+            this.mnuFiltroKirsch.Text = "Kirsch";
+            this.mnuFiltroKirsch.Click += new System.EventHandler(this.mnuFiltroKirsch_Click);
+            // 
+            // mnuFiltroRobinson
+            // 
+            this.mnuFiltroRobinson.Name = "mnuFiltroRobinson";
+            this.mnuFiltroRobinson.Size = new System.Drawing.Size(147, 22);
+            this.mnuFiltroRobinson.Text = "Robinson";
+            this.mnuFiltroRobinson.Click += new System.EventHandler(this.mnuFiltroRobinson_Click);
             // 
             // mnuFiltroMarrHildreth
             // 
             this.mnuFiltroMarrHildreth.Name = "mnuFiltroMarrHildreth";
-            this.mnuFiltroMarrHildreth.Size = new System.Drawing.Size(152, 22);
+            this.mnuFiltroMarrHildreth.Size = new System.Drawing.Size(147, 22);
             this.mnuFiltroMarrHildreth.Text = "Marr-Hildreth";
             this.mnuFiltroMarrHildreth.Click += new System.EventHandler(this.mnuFiltroMarrHildreth_Click);
             // 
@@ -316,14 +338,14 @@
             // mnuEstatisticas
             // 
             this.mnuEstatisticas.Name = "mnuEstatisticas";
-            this.mnuEstatisticas.Size = new System.Drawing.Size(152, 22);
+            this.mnuEstatisticas.Size = new System.Drawing.Size(136, 22);
             this.mnuEstatisticas.Text = "Estatísticas";
             this.mnuEstatisticas.Click += new System.EventHandler(this.mnuEstatisticas_Click);
             // 
             // mnuHistograma
             // 
             this.mnuHistograma.Name = "mnuHistograma";
-            this.mnuHistograma.Size = new System.Drawing.Size(152, 22);
+            this.mnuHistograma.Size = new System.Drawing.Size(136, 22);
             this.mnuHistograma.Text = "Histograma";
             this.mnuHistograma.Click += new System.EventHandler(this.mnuHistograma_Click);
             // 
@@ -339,19 +361,49 @@
             this.picImagem.TabIndex = 1;
             this.picImagem.TabStop = false;
             // 
-            // mnuFiltroKirsch
+            // morfologiaToolStripMenuItem
             // 
-            this.mnuFiltroKirsch.Name = "mnuFiltroKirsch";
-            this.mnuFiltroKirsch.Size = new System.Drawing.Size(152, 22);
-            this.mnuFiltroKirsch.Text = "Kirsch";
-            this.mnuFiltroKirsch.Click += new System.EventHandler(this.mnuFiltroKirsch_Click);
+            this.morfologiaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuDilatacao,
+            this.mnuErosao,
+            this.mnuAbertura,
+            this.mnuFechamento});
+            this.morfologiaToolStripMenuItem.Name = "morfologiaToolStripMenuItem";
+            this.morfologiaToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.morfologiaToolStripMenuItem.Text = "Morfologia";
             // 
-            // mnuFiltroRobinson
+            // mnuDilatacao
             // 
-            this.mnuFiltroRobinson.Name = "mnuFiltroRobinson";
-            this.mnuFiltroRobinson.Size = new System.Drawing.Size(152, 22);
-            this.mnuFiltroRobinson.Text = "Robinson";
-            this.mnuFiltroRobinson.Click += new System.EventHandler(this.mnuFiltroRobinson_Click);
+            this.mnuDilatacao.Name = "mnuDilatacao";
+            this.mnuDilatacao.Size = new System.Drawing.Size(152, 22);
+            this.mnuDilatacao.Text = "Dilatação";
+            this.mnuDilatacao.Click += new System.EventHandler(this.mnuDilatacao_Click);
+            // 
+            // mnuErosao
+            // 
+            this.mnuErosao.Name = "mnuErosao";
+            this.mnuErosao.Size = new System.Drawing.Size(152, 22);
+            this.mnuErosao.Text = "Erosão";
+            this.mnuErosao.Click += new System.EventHandler(this.mnuErosao_Click);
+            // 
+            // mnuAbertura
+            // 
+            this.mnuAbertura.Name = "mnuAbertura";
+            this.mnuAbertura.Size = new System.Drawing.Size(152, 22);
+            this.mnuAbertura.Text = "Abertura";
+            this.mnuAbertura.Click += new System.EventHandler(this.mnuAbertura_Click);
+            // 
+            // mnuFechamento
+            // 
+            this.mnuFechamento.Name = "mnuFechamento";
+            this.mnuFechamento.Size = new System.Drawing.Size(152, 22);
+            this.mnuFechamento.Text = "Fechamento";
+            this.mnuFechamento.Click += new System.EventHandler(this.mnuFechamento_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(270, 6);
             // 
             // frmImageEditor
             // 
@@ -410,6 +462,12 @@
         private System.Windows.Forms.ToolStripMenuItem mnuFiltroMediana;
         private System.Windows.Forms.ToolStripMenuItem mnuFiltroKirsch;
         private System.Windows.Forms.ToolStripMenuItem mnuFiltroRobinson;
+        private System.Windows.Forms.ToolStripMenuItem morfologiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuDilatacao;
+        private System.Windows.Forms.ToolStripMenuItem mnuErosao;
+        private System.Windows.Forms.ToolStripMenuItem mnuAbertura;
+        private System.Windows.Forms.ToolStripMenuItem mnuFechamento;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 
     }
 }

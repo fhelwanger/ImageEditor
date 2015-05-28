@@ -451,6 +451,62 @@ namespace ImageEditor.Gui
             TrocarImagem(filtros.Imagem);
         }
 
+        private void mnuDilatacao_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var morfo = new Morfologia();
+            morfo.CarregarImagem(bitmap);
+            morfo.Dilatacao();
+
+            TrocarImagem(morfo.Imagem);
+        }
+
+        private void mnuErosao_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var morfo = new Morfologia();
+            morfo.CarregarImagem(bitmap);
+            morfo.Erosao();
+
+            TrocarImagem(morfo.Imagem);
+        }
+
+        private void mnuAbertura_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var morfo = new Morfologia();
+            morfo.CarregarImagem(bitmap);
+            morfo.Abertura();
+
+            TrocarImagem(morfo.Imagem);
+        }
+
+        private void mnuFechamento_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var morfo = new Morfologia();
+            morfo.CarregarImagem(bitmap);
+            morfo.Fechamento();
+
+            TrocarImagem(morfo.Imagem);
+        }
+
         private void mnuEstatisticas_Click(object sender, EventArgs e)
         {
             if (!ConsistirImagemEscalaCinzaSelecionada())

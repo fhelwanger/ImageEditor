@@ -46,6 +46,7 @@
     <Compile Include="Classes\FiltrosPassaAlta.cs" />
     <Compile Include="Classes\FiltrosPassaBaixa.cs" />
     <Compile Include="Classes\ManipuladorImagem.cs" />
+    <Compile Include="Classes\Morfologia.cs" />
     <Compile Include="Classes\TransformacoesImagem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
