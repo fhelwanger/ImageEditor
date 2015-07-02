@@ -81,6 +81,12 @@
     <Compile Include="Forms\frmRotacao.Designer.cs">
       <DependentUpon>frmRotacao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmSelecionarObjetosLimite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSelecionarObjetosLimite.Designer.cs">
+      <DependentUpon>frmSelecionarObjetosLimite.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmTranslacao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRotacao.resx">
       <DependentUpon>frmRotacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelecionarObjetosLimite.resx">
+      <DependentUpon>frmSelecionarObjetosLimite.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmTranslacao.resx">
       <DependentUpon>frmTranslacao.cs</DependentUpon>

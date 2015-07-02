@@ -507,6 +507,74 @@ namespace ImageEditor.Gui
             TrocarImagem(morfo.Imagem);
         }
 
+        private void mnuMedidasCirculo_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var extracao = new ExtracaoCaracteristicas();
+            extracao.CarregarImagem(bitmap);
+
+            var medidas = extracao.CalcularCirculo();
+
+            MessageBox.Show("Área: " + medidas.Area + "\n" +
+                            "Perímetro: " + medidas.Perimetro + "\n" +
+                            "Circularidade: " + medidas.Circularidade.ToString("0.00"));
+        }
+
+        private void mnuMedidasQuadrados_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            var extracao = new ExtracaoCaracteristicas();
+            extracao.CarregarImagem(bitmap);
+
+            var quadrados = extracao.CalcularQuadrados();
+            var areaMaior = 0;
+            var perimetroMenor = 0;
+
+            if (quadrados[0].Area > quadrados[1].Area)
+            {
+                areaMaior = quadrados[0].Area;
+                perimetroMenor = quadrados[1].Perimetro;
+            }
+            else
+            {
+                areaMaior = quadrados[1].Area;
+                perimetroMenor = quadrados[0].Perimetro;
+            }
+
+            MessageBox.Show("Área do quadrado maior: " + areaMaior + "\n" +
+                            "Perímetro do quadrado menor: " + perimetroMenor);
+        }
+
+        private void mnuSelecionarObjetos_Click(object sender, EventArgs e)
+        {
+            if (!ConsistirImagemEscalaCinzaSelecionada())
+            {
+                return;
+            }
+
+            using (var j = new frmSelecionarObjetosLimite())
+            {
+                if (j.ShowDialog() == DialogResult.OK)
+                {
+                    var extracao = new ExtracaoCaracteristicas();
+
+                    extracao.CarregarImagem(bitmap);
+
+                    extracao.SelecionarDiversos(j.Tamanho);
+
+                    TrocarImagem(extracao.Imagem);
+                }
+            }
+        }
+
         private void mnuEstatisticas_Click(object sender, EventArgs e)
         {
             if (!ConsistirImagemEscalaCinzaSelecionada())
@@ -556,6 +624,6 @@ namespace ImageEditor.Gui
             }
 
             return true;
-        }
+        }  
     }
 }
